@@ -12,6 +12,7 @@ Working direction: follow Google's Open Knowledge Format (OKF) as the baseline k
 
 - `docs/` contains project documentation.
 - `docs/impl-research/` collects research on ideas/approaches. Start at [`docs/impl-research/research-index.md`](docs/impl-research/research-index.md) for the catalog of research docs and current working assumptions.
+- [`style.md`](style.md) — writing & style conventions for project docs. Consult before authoring or editing any markdown.
 
 ## Managing and tracking work
 
