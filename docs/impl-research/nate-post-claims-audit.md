@@ -1,3 +1,9 @@
+---
+type: "AI-synthesis"
+title: 'Nate "Open Brain" Post — Claims Audit'
+description: "Claims audit of Nate's 'Open Brain' post vs. the code — inventories each assertion, scores it, and distills the durable ideas from the persuasion."
+---
+
 # Nate "Open Brain" Post — Claims Audit
 
 Internal working doc. Goal: strip the persuasion off Nate B. Jones's "Open Brain" post, keep the durable ideas.

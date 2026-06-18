@@ -1,10 +1,16 @@
+---
+type: "primary source - specification"
+title: "Open Knowledge Format (OKF) v0.1 spec"
+description: "Vendored verbatim copy of the OKF v0.1 spec (GoogleCloudPlatform/knowledge-catalog) — our firm format requirement."
+---
+
 <!--
 VENDORED SOURCE ARTIFACT — do not edit the spec body below.
   Spec:    Open Knowledge Format (OKF) v0.1 — Draft
   Origin:  https://github.com/GoogleCloudPlatform/knowledge-catalog  (okf/SPEC.md)
   Commit:  ba17dd5
   Copied:  2026-06-18 (local path: ~/Projects/knowledge-catalog/okf/SPEC.md)
-  Layer:   `source` (see research-index.md → Layering convention)
+  Layer:   `source` (see working-notes.md → Layering convention)
   Why:     OKF is our firm format requirement; kept here verbatim for easy reference.
            To update, re-copy from upstream and bump the commit/date above — don't hand-edit.
 -->

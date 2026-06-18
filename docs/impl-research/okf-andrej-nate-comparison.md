@@ -1,3 +1,9 @@
+---
+type: "AI-synthesis"
+title: "OKF vs Andrej vs Nate — Compare / Contrast (superseded)"
+description: "Frozen intermediary artifact — original compare/contrast of the three reference approaches; reference content now merged into prior-art-landscape.md. Kept for provenance."
+---
+
 # OKF vs Andrej vs Nate — Compare / Contrast
 
 > **⚠️ Superseded (kept for provenance/lineage).** As of increment `0006`, this doc's *reference* content (the "three kinds of thing" framing, master comparison table, shared DNA, the real forks) is merged into [`prior-art-landscape.md`](prior-art-landscape.md) §1–2, and its `## So what — our design position` (opinion) is merged into [`lens-WIP.md`](lens-WIP.md). Those are now canonical. This file is **frozen** as the intermediary artifact those were built from — do not edit it as a living doc; update the landscape/lens instead. Its facts intentionally duplicate the canonical docs (a frozen snapshot, not a doc to keep in sync).

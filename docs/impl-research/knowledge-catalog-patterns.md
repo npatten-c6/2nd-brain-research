@@ -1,3 +1,9 @@
+---
+type: "AI-synthesis"
+title: "Knowledge Catalog repo patterns"
+description: "Reusable patterns distilled from Google's Knowledge Catalog repo: OKF as minimal 'knowledge as files', metadata-as-code sync, enrichment/discovery pipelines, and a candidate local-first architecture."
+---
+
 # Knowledge Catalog repo patterns
 
 Source repo: [`../knowledge-catalog`](../../../knowledge-catalog/README.md)

@@ -18,7 +18,7 @@ preferences surface.
   - Avoid: `**OKF = a file _format spec_.**`
   - Why: keeps the taxonomy primary and instances secondary (essential for
     `reference`/Layer-1 docs; see the layering convention in
-    [`research-index.md`](docs/impl-research/research-index.md)).
+    [`working-notes.md`](docs/impl-research/working-notes.md)).
 - **Plain, descriptive headings over clever/rhetorical ones.**
   - Prefer: `Formats, workflows, and full implementations`
   - Avoid: `The space has three *kinds* of thing — not three competitors`
@@ -38,9 +38,15 @@ preferences surface.
 - **Keep the `reference` / `lens` / `source` separation honest.** Facts and
   decision-neutral analysis in `reference`; opinion, verdicts, and recommendations
   in `lens`; verbatim external artifacts in `source`. (Defined in
-  [`research-index.md`](docs/impl-research/research-index.md).)
+  [`working-notes.md`](docs/impl-research/working-notes.md).)
 - **Preserve intermediary artifacts.** When a doc is superseded/merged, keep the
   original (banner it as frozen) for provenance/lineage rather than deleting it.
+- **`docs/impl-research/` is an OKF bundle — give every concept doc `type`
+  frontmatter.** A new `.md` there needs a YAML frontmatter block with a non-empty
+  `type` (OKF's one hard rule). Use the established vocabulary (`primary source -
+  <medium>`, `AI-synthesis`, `working-notes`) or add a descriptive value; see
+  [`working-notes.md`](docs/impl-research/working-notes.md) → Doc conventions. Add
+  `title` + `description` too. Run `scripts/check-okf.sh` to verify.
 
 ## Markdown formatting
 

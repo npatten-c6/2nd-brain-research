@@ -1,3 +1,11 @@
+<!--
+OKF EXEMPTION — deliberately NOT a bundle concept (no frontmatter, no `type`).
+This is our own unorganized working file (parked opinion), not knowledge in the
+bundle. The conformance check (scripts/check-okf.sh) skips it by name. When this
+is reorganized into the planned `recommendations-by-persona.md`, that successor
+SHOULD be a conformant concept doc.
+-->
+
 # Lens (WIP) — Opinion / Recommendations, Unorganized
 
 > **Layer 2 · `lens` · ⚠️ WIP — unorganized holding doc.** This is parked opinion: verdicts, "what to steal," borrow-vs-build, niche assessment, the enterprise-deployability readout, and our design position. It was extracted out of the Layer 1 reference docs (so those stay decision-neutral) during increment `0006`, which shipped **Layer 1 only**.
@@ -14,7 +22,7 @@
 
 The three reference approaches slot together cleanly (see the [reference-approach comparison](prior-art-landscape.md#reference-approach-comparison)):
 
-- **OKF = our file format** — markdown concept docs + YAML frontmatter + links; permissive. The *substrate*. (Now a firm requirement — see [`research-index.md`](research-index.md).)
+- **OKF = our file format** — markdown concept docs + YAML frontmatter + links; permissive. The *substrate*. (Now a firm requirement — see [`working-notes.md`](working-notes.md).)
 - **Andrej = our workflow + philosophy** — LLM-maintained living wiki, files-as-truth, ingest/query/lint ops, `index.md` + `log.md`, Obsidian as read UI, curation-in-the-loop. The *operating model*.
 - **Nate = our mechanics & access library, selectively** — atomic extraction, fingerprint + semantic dedup, dry-run/job model, provenance/sensitivity tiers, embeddings, MCP/CLI agent interface — applied to a **derived layer over files**, with his DB-as-truth + cloud coupling rejected.
 

@@ -1,3 +1,9 @@
+---
+type: "AI-synthesis"
+title: "Prior-Art Landscape"
+description: "Map of the design space: concept/architecture taxonomy (13 axes), the three reference approaches (OKF/Andrej/Nate) with master comparison, 12 shipping-tool instances, and decision-neutral domain observations."
+---
+
 # Prior-Art Landscape
 
 > **Layer 1 · `reference`** — a _decision/requirement-neutral_ map of the design space and the tools in it. It describes the forks, the archetypes, and the _inherent_ trade-offs **without advocating a choice** for us or any persona. Opinion, recommendations, "what to steal," and per-requirement verdicts live in Layer 2 (see [`lens-WIP.md`](lens-WIP.md)).
@@ -6,7 +12,7 @@
 
 **Date:** 2026-06-18. Scope: shipping local-first / LLM-managed PKM & agent-memory tools that solve the same value prop — a knowledge base where an LLM does the bookkeeping and knowledge compounds — plus the three reference _approaches_ (OKF / Andrej / Nate) that frame the space.
 
-**Companion docs:** [`research-index.md`](research-index.md) (catalog + conventions) · [`lens-WIP.md`](lens-WIP.md) (Layer 2: our opinions/recommendations, parked & unorganized) · [`okf-andrej-nate-comparison.md`](okf-andrej-nate-comparison.md) (superseded — its reference content is merged here) · source artifacts: [`andrej-wiki-gist.md`](andrej-wiki-gist.md), [`nate-post-open-brian.md`](nate-post-open-brian.md), [`knowledge-catalog-patterns.md`](knowledge-catalog-patterns.md).
+**Companion docs:** [`index.md`](index.md) (catalog) · [`working-notes.md`](working-notes.md) (conventions + assumptions) · [`lens-WIP.md`](lens-WIP.md) (Layer 2: our opinions/recommendations, parked & unorganized) · [`okf-andrej-nate-comparison.md`](okf-andrej-nate-comparison.md) (superseded — its reference content is merged here) · source artifacts: [`andrej-wiki-gist.md`](andrej-wiki-gist.md), [`nate-post-open-brian.md`](nate-post-open-brian.md), [`knowledge-catalog-patterns.md`](knowledge-catalog-patterns.md).
 
 ### Verification legend
 

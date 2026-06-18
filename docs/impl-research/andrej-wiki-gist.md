@@ -1,3 +1,9 @@
+---
+type: "primary source - gist"
+title: "LLM Wiki (Karpathy gist)"
+description: "Seed idea — an LLM incrementally builds and maintains a persistent, interlinked markdown wiki between you and raw sources, instead of re-deriving via RAG per query."
+---
+
 # LLM Wiki
 
 A pattern for building personal knowledge bases using LLMs.

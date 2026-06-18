@@ -3,10 +3,10 @@ title: "Why your AI starts from zero every time you open a new chat + my Open Br
 source: "https://natesnewsletter.substack.com/p/every-ai-you-use-forgets-you-heres?utm_source=profile&utm_medium=reader2"
 author:
   - "[[Nate]]"
-type: "clipping"
+type: "primary source - blog post"
 published: 2026-03-01
 created: 2026-06-18
-description: "Watch now | Allow me to introduce you to Open Brain.
+description: "Watch now | Allow me to introduce you to Open Brain."
 ---
 
 # Original

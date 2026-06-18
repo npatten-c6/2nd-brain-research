@@ -1,3 +1,9 @@
+---
+type: "AI-synthesis"
+title: "OB1 Ingestion / Capture / Dedup Recon"
+description: "Deep-dive on OB1's ingestion/capture/dedup pipeline: canonical spine, fingerprint + semantic dedup, job/dry-run model, importer family, prompt-injection hardening."
+---
+
 # OB1 Ingestion / Capture / Dedup Recon
 
 Source: `~/Projects/OB1/`. Goal: extract durable concepts + pipeline shapes for our local-first build.
