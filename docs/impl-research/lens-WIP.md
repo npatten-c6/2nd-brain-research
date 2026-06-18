@@ -1,0 +1,126 @@
+# Lens (WIP) — Opinion / Recommendations, Unorganized
+
+> **Layer 2 · `lens` · ⚠️ WIP — unorganized holding doc.** This is parked opinion: verdicts, "what to steal," borrow-vs-build, niche assessment, the enterprise-deployability readout, and our design position. It was extracted out of the Layer 1 reference docs (so those stay decision-neutral) during increment `0006`, which shipped **Layer 1 only**.
+>
+> **It is not yet structured.** The plan is a later increment that reorganizes this into `recommendations-by-persona.md` — concise recommendations through the lens of specific personas (us / enterprise non-tech staff / enterprise IT-builder), each pointing into [`prior-art-landscape.md`](prior-art-landscape.md) by anchor and **restating no facts**. Until then, treat everything here as our standing opinion, not as reference.
+>
+> **Discipline for this doc:** all *facts* live in [`prior-art-landscape.md`](prior-art-landscape.md); this doc points to them and adds judgment. Where a claim below restates a fact, it should eventually become a pointer.
+
+**Source of this content:** extracted from the pre-0006 `existing-tools-prior-art.md` and the `## So what — our design position` section of `okf-andrej-nate-comparison.md`.
+
+---
+
+## Our design position (from the OKF/Andrej/Nate comparison)
+
+The three reference approaches slot together cleanly (see the [reference-approach comparison](prior-art-landscape.md#reference-approach-comparison)):
+
+- **OKF = our file format** — markdown concept docs + YAML frontmatter + links; permissive. The *substrate*. (Now a firm requirement — see [`research-index.md`](research-index.md).)
+- **Andrej = our workflow + philosophy** — LLM-maintained living wiki, files-as-truth, ingest/query/lint ops, `index.md` + `log.md`, Obsidian as read UI, curation-in-the-loop. The *operating model*.
+- **Nate = our mechanics & access library, selectively** — atomic extraction, fingerprint + semantic dedup, dry-run/job model, provenance/sensitivity tiers, embeddings, MCP/CLI agent interface — applied to a **derived layer over files**, with his DB-as-truth + cloud coupling rejected.
+
+**One-line:** Andrej's workflow, on OKF's format, with Nate's pipeline borrowed into the derived layer — all local. The two genuine forks still open: **page-vs-atom granularity** and **edit-in-place-vs-regenerate** (both on the agenda in [`ob1-synthesis.md`](ob1-synthesis.md)).
+
+---
+
+## TL;DR verdicts (opinionated)
+
+1. **Our broad niche is no longer empty — it filled fast in 2026.** The closest neighbor is [`nashsu/llm_wiki`](prior-art-landscape.md#52-nashsullm_wiki--llm-maintained-wiki-from-sources-), which implements almost exactly our raw/wiki/schema pattern. We are **not first**.
+2. **Closest neighbor on mechanics + files-as-truth: [Basic Memory](prior-art-landscape.md#51-basic-memory--files-as-truth-pkm--native-mcp-).** Files-as-truth, frontmatter + wikilink graph, LLM edits-in-place via MCP, FTS+vector+graph, and `schema_validate`/`schema_infer` tools that directly answer our "validate-frontmatter-before-write" fork.
+3. **Closest neighbor on workflow/philosophy: `nashsu/llm_wiki`** — same 3-layer model, but it **regenerates** the wiki (Nate posture) rather than maintaining an edit-in-place living narrative (Andrej posture).
+4. **Closest mature product: [Khoj](prior-art-landscape.md#53-khoj--personal-ai-searchchat-read-only-)** — but read/index-only; it diverges from us on files-as-truth (DB-as-index) and synthesis (none).
+5. **The "regenerate vs edit-in-place" fork is being voted on — and the market leans regenerate.** Worth revisiting our lean (synthesis #3).
+6. **The agent-memory cluster (Mem0, Letta, Cognee) is a different category** — useful for *mechanics*, not as architectural neighbors.
+7. **Watch the marketing-vs-code gap.** sqlite-memory markets "markdown as the source of truth" but is DB-as-truth. Don't take taglines at face value.
+8. **One dead body to learn from:** Reor — a files-on-disk + local-vector PKM that didn't survive.
+9. **Verdict on "is our niche open?":** the broad niche is crowded and validated; our *specific* combination (OKF + edit-in-place living wiki + curated ingest + provenance/trust + Rust-CLI, all local) is differentiated but **not unique**. Honest risk: rebuilding Basic Memory with extra steps. Need a crisp "why not just fork Basic Memory / study llm_wiki" before building.
+10. **Through the enterprise-deployability lens, the answer flips:** the best *architecture* isn't the best *rollout candidate* — what wins is whatever clears "non-technical staff can install it + tech/security approve it + runs on Claude Enterprise + no self-hosted server." See [enterprise-deployability lens](#enterprise-deployability-lens-opinionated) below.
+
+---
+
+## What to steal (per closest neighbor)
+
+**Basic Memory:**
+- `schema_validate` / `schema_infer` / `schema_diff` as first-class tools (realizes our "schema-validate-before-write w/ correction loop" fork; guards the frontmatter-corruption risk in [`ob1-synthesis.md`](ob1-synthesis.md)).
+- Observations/relations-in-body syntax → atoms & typed edges *derived by parsing human-readable pages*, not stored as separate atom files. Validates "note = file unit, atom = derived granularity."
+- MCP behavior-hint annotations (read-only/destructive/idempotent) on every write tool — cheap safety metadata.
+- `memory://` URL graph navigation — clean addressing for link-by-link context building.
+
+**nashsu/llm_wiki:**
+- Its 3-layer raw/wiki/schema file layout as a shipped reference — study before designing ours.
+- 4-signal graph relevance rerank (direct links + source overlap + Adamic-Adar + type affinity).
+- SHA256 skip-unchanged cache + "guaranteed source summary" coverage — Rust-CLI-able idempotency.
+- Configurable context budget (4K–1M tokens) as an explicit retrieval knob.
+
+**Khoj:**
+- Bi-encoder retrieve → cross-encoder rerank as the standard two-stage semantic retrieval shape.
+- Sensible local-embedding defaults so self-hosting "just works."
+- Multi-client reach pattern (one brain, many front-ends) — for us a *local* CLI/stdio-MCP.
+
+**Cross-tool patterns (tied to our open forks):**
+
+| Pattern | Source(s) | Ties to our fork / agenda |
+|---|---|---|
+| `schema_validate`/`infer`/`diff` as agent tools | Basic Memory | write-back contract (#5); frontmatter-corruption risk |
+| Observations + typed relations parsed from human-readable pages | Basic Memory | page-vs-atom (#2) — "note = file unit, atom = derived" |
+| 3-layer raw/wiki/schema layout as a shipped reference | nashsu/llm_wiki | validates our layering (#1) |
+| 4-signal graph relevance rerank | nashsu/llm_wiki | retrieval/rerank (#11); entity-graph (#8) |
+| SHA256 skip-unchanged + guaranteed-coverage ingest | nashsu/llm_wiki (≈ OB1 fingerprint) | dedup/idempotency (#6) |
+| Bi-encoder retrieve → cross-encoder rerank | Khoj | two-stage semantic retrieval (#3/#11) |
+| Configurable FTS5 ↔ vector weight; local embeddings in one SQLite file | sqlite-memory | SQLite + FTS5 + sqlite-vec derived store (#3/#4) |
+| Local on-device embeddings in a hidden sidecar dir | Smart Connections | DB-as-derived-view-beside-files (#1); Obsidian-as-UI (#17) |
+| Ontology generation + auto-routing recall | Cognee | entity-graph (#8); schema-aware routing (#11) |
+| MCP behavior-hint annotations on write tools | Basic Memory | interface/agent-access safety (#13) |
+| Local stdio/loopback MCP server (`127.0.0.1`) | nashsu/llm_wiki, Basic Memory | interface (#13) — local-MCP over hosted-HTTP |
+| Memory-evolution caution (LLM rewriting old notes drifts/bloats) | A-MEM (research) | edit-in-place-vs-regenerate (#3); lint (#12); fluff-accumulation risk |
+
+---
+
+## Closest neighbors — borrow-vs-build readout
+
+Two tools now occupy most of our space; a third owns the mature-product slot.
+
+- **Basic Memory ≈ our mechanics + truth model.** If we strip our project to "files-as-truth + LLM writes/edits markdown + MCP + derived index," Basic Memory already *is* that. Build-vs-borrow pressure is highest here. Differentiators that might justify building/forking rather than adopting:
+  1. **OKF-format compliance** (Basic Memory uses its own observations/relations DSL, not OKF).
+  2. **Curated external-source ingest** (Basic Memory is chat-capture-centric).
+  3. **Provenance/trust ladder** (observed/inferred/confirmed/generated) — Basic Memory has none.
+  4. **Rust-CLI-first, deterministic hot paths** (Basic Memory is Python).
+  - **Recommendation:** before writing code, do a hard spike on Basic Memory — install it, read its sync + schema-tool source — and answer "what do we get by building that forking/contributing wouldn't?" If the answer is only "OKF + provenance + Rust," consider whether those are extensions *to* Basic Memory rather than a new system.
+- **nashsu/llm_wiki ≈ our workflow.** Borrow its file layout, 4-signal rerank, SHA256 skip-unchanged cache, context-budget knob. Diverge: it regenerates; we lean edit-in-place for entity pages. Read its source as a reference design; don't depend on it (GPL-3 desktop app).
+- **Khoj ≈ the search/chat layer we're *not* building.** Borrow retrieval mechanics; don't adopt its read-only/DB-as-index architecture.
+
+---
+
+## Enterprise-deployability lens (opinionated)
+
+The bar: **a non-technical employee (e.g. GTM) can use it with Claude Enterprise as the approved AI, no self-hosted services, and nothing tech/security must vet.** Frontier cloud models are fine; *standing up infra* is the disqualifier.
+
+| Tool | Deployable by non-tech staff? | What it needs | Verdict for enterprise rollout |
+|---|---|---|---|
+| **Claude Enterprise + local MCP server** (e.g. Basic Memory) | 🟡 Medium | Local MCP server; connect from Claude. Files on disk, no DB server. | **Best fit in spirit** — but MCP setup is still technical; needs one-click/managed install to clear the GTM bar. |
+| **Obsidian + plugins** (Smart Connections, Copilot) | ✅ High | Install Obsidian + a plugin; point at a model. | **Most realistic for broad staff** today. Weakest on "LLM maintains the wiki," strongest on adoptability. |
+| **nashsu/llm_wiki** | ✅ High (single user) | Desktop app install; bring an API key. | Good adoptability as an app; but individual desktop tool, GPL-3, regenerate-model — not an org-sanctioned platform. |
+| **Khoj (self-host)** | ❌ Low | Server + DB, Docker; or cloud (data leaves). | Self-host fails no-infra; cloud fails data-residency. Org-hosted = a real IT project. |
+| **AnythingLLM (desktop)** | ✅ High (desktop) / ❌ (Docker) | Desktop one-click + bundled vector DB; multi-user is Docker. | Desktop edition is staff-deployable; but document-RAG chat, not a compounding wiki. |
+| **Mem0 / Letta / Cognee** | ❌ Low | Python, infra, vector/graph DBs. | Building blocks for *us*, not end-user tools. |
+| **sqlite-memory** | ❌ Low | Dev tool (SQL ext / CLI). | Infra/plumbing, not an end-user product. |
+
+**Takeaways for the recommendation track:**
+- The enterprise winner is **not** the best *architecture* — it's whatever clears the **install + approval** bar. Today that's **Obsidian + plugins** or a **managed/one-click local MCP server behind Claude Enterprise**.
+- **Self-hosted-server tools (Khoj, agent-memory layers) are out** for self-serve staff use.
+- **The unsolved enterprise gap:** an *LLM-maintained living wiki* a non-technical employee installs in minutes, runs on Claude Enterprise, keeps data in local/approved files, and needs zero server. That gap is the most useful thing to track for the work recommendation.
+- **Open question:** what exactly Claude Enterprise permits — local MCP servers, custom connectors, admin-approved tools, where files may live. Gates every "Claude Enterprise + X" option.
+
+---
+
+## Gaps / is our niche open? (opinionated verdict)
+
+**Honest verdict: the broad niche is occupied and validated; our specific intersection is differentiated but not unique — and we are not first.**
+
+- **What's now covered by shipping tools** — see [domain observations](prior-art-landscape.md#6-domain-observations-decision-neutral).
+- **What no single tool combines (our slot):** OKF-format compliance + edit-in-place *living* wiki (not regenerate) + curated external-source ingest + a provenance/trust ladder + Rust-CLI-first determinism + Obsidian-as-UI — all fully local. Each ingredient exists somewhere; the *combination* doesn't.
+- **Risks to our thesis:**
+  1. **Duplication risk.** Basic Memory already nails files-as-truth + edit-in-place + MCP + schema-validate. Need a crisp "why not fork/extend it?"
+  2. **The market is voting "regenerate."** Re-examine our edit-in-place lean (synthesis #3) rather than assume it.
+  3. **Single-maintainer mortality.** Reor (our nearest architectural twin) was archived after ~a year. Survival needs a sharp wedge.
+  4. **"Files-as-truth" is a marketing word now** — our differentiation has to be real, not a tagline.
+- **Where we're still clearly ahead:** **provenance/trust for LLM-authored claims** (OB1's richest idea) is essentially absent from every neighbor surveyed. If our project has one defensible wedge, **trustworthy LLM-authored knowledge with citations + a review gate** is it. Lead with that.
