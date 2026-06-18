@@ -1,10 +1,10 @@
 ---
 id: 5
-status: backlog
+status: done
 tags:
 - research
 created_at: 2026-06-18T13:47:48Z
-updated_at: 2026-06-18T13:47:48Z
+updated_at: 2026-06-18T20:04:59Z
 ---
 ## Requirements & the 'Why'
 
@@ -60,19 +60,27 @@ Also actively look for ones it missed: Logseq + AI, Basic Memory, Notion AI, Mem
 
 ## Acceptance criteria
 
-- [ ] `existing-tools-prior-art.md` created and linked in `research-index.md` (+ retire/realize the "verify Khoj et al." open thread).
-- [ ] >= 8 tools captured; Tier-1 deep-dive on the 3-5 closest neighbors (Khoj included).
-- [ ] Every factual claim cites a primary-source link; each tool marked verified/partial/unverified.
-- [ ] Results mapped onto our existing comparison axes (slot into the comparison doc's frame).
-- [ ] Explicit borrow-vs-build readout for the closest neighbor(s).
-- [ ] "Is our niche open?" verdict + concrete patterns-to-steal list tied to our agenda.
+- [x] `existing-tools-prior-art.md` created and linked in `research-index.md` (+ retire/realize the "verify Khoj et al." open thread).
+- [x] >= 8 tools captured (12); Tier-1 deep-dive on the 3-5 closest neighbors (Basic Memory, nashsu/llm_wiki, Khoj).
+- [x] Every factual claim cites a primary-source link; each tool marked verified/partial/unverified.
+- [x] Results mapped onto our existing comparison axes (slot into the comparison doc's frame).
+- [x] Explicit borrow-vs-build readout for the closest neighbor(s) (esp. Basic Memory).
+- [x] "Is our niche open?" verdict + concrete patterns-to-steal list tied to our agenda.
+
+## Outcome notes
+
+- **Closest neighbors found:** Basic Memory (files-as-truth + MCP + edit-in-place + `schema_validate`) and **nashsu/llm_wiki** (a shipped implementation of our exact raw/wiki/schema 3-layer pattern, 11.9k★, released the day of the survey) — both **missed by the Gemini run**. Khoj is the mature-but-read-only product.
+- **Verdict:** broad niche now occupied & validated (Karpathy gist → popular product in ~2 months); we are **not first**. Our specific slot (OKF + edit-in-place living wiki + curated ingest + provenance/trust + Rust-CLI, all local) is differentiated but not unique. Highest duplication risk = Basic Memory.
+- **Clearest wedge:** provenance/trust for LLM-authored claims — absent from every neighbor surveyed.
+- **Follow-ups (logged in research-index open threads):** (a) borrow-vs-build spike on Basic Memory; (b) revisit edit-in-place vs regenerate lean (market leans regenerate); (c) lead with provenance/trust.
+- **Verification self-check:** all 12 entries carry primary links; 8 ✅ verified (direct fetch), 3 🟡 partial (secondary), 1 honorable-mention flagged for marketing-vs-README truth-model gap (sqlite-memory). No synthesized quotes; Reor flagged archived/dead.
 
 ## Tasks
 
-- [ ] Read the four context docs above; lock the per-tool schema from the comparison axes.
-- [ ] Build/confirm the candidate list (verify seeds exist; hunt for missed ones).
-- [ ] Tier-1 deep-dives (Khoj first) from primary sources.
-- [ ] Tier-2 light entries from primary sources.
-- [ ] Assemble the doc per the structure above (table + entries + neighbors + patterns + gaps).
-- [ ] Cross-link from research-index.md; update the open-threads section.
-- [ ] Self-check against verification discipline before marking done.
+- [x] Read the four context docs above; lock the per-tool schema from the comparison axes.
+- [x] Build/confirm the candidate list (verify seeds exist; hunt for missed ones).
+- [x] Tier-1 deep-dives from primary sources.
+- [x] Tier-2 light entries from primary sources.
+- [x] Assemble the doc per the structure above (table + entries + neighbors + patterns + gaps).
+- [x] Cross-link from research-index.md; update the open-threads section.
+- [x] Self-check against verification discipline before marking done.
