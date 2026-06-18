@@ -1,10 +1,10 @@
 ---
 id: 1
-status: in_progress
+status: done
 tags:
 - research
 created_at: 2026-06-18T12:14:28Z
-updated_at: 2026-06-18T12:14:30Z
+updated_at: 2026-06-18T14:07:06Z
 ---
 ## Goal
 Capture concise research notes from `~/Projects/knowledge-catalog` that are relevant to designing a local-first second brain / open brain / knowledge wiki.
