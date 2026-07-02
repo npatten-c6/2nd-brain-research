@@ -27,6 +27,11 @@ preferences surface.
 - **Cut rhetorical flourish and jargon.** Say it directly. Drop set-piece
   phrases ("apples-to-apples is a category error", "the uncomfortable finding")
   in favor of a plain statement of the fact.
+- **Skip the "not X, it's Y" setup.** The contrastive build ("the real question
+  isn't A, it's B"; "it's not a bug, it's a feature") manufactures emphasis and
+  reads as marketing. State the point directly. Prefer "for SPS use, keep storage
+  local or on an approved service" over "the firm line isn't files-vs-DB, it's
+  local vs cloud".
 - **Avoid insider shorthand.** Terms like "the shipping market leans X" assume
   the reader tracks the field; write for a colleague who doesn't.
 - **Write for the reader's task, not about the document.** Cut meta-narration

@@ -39,7 +39,7 @@ with, and the right answer will differ by person, role, and department.
 
 | Fork | Options | Trade-offs |
 |---|---|---|
-| **Where truth lives** | Plain **files** vs. a **local database** (SQLite/DuckDB) | Both are viable. Files are the most portable and tool-agnostic and need no setup; a local DB can pay off for scale or fast structured queries. The firm line isn't files-vs-DB, it's **local vs third-party cloud**: keep the source of truth on your device or approved storage, not in a hosted service like Supabase. |
+| **Where truth lives** | Plain **files** vs. a **local database** (SQLite/DuckDB) | Both are viable. Files are the most portable and tool-agnostic and need no setup; a local DB can pay off for scale or fast structured queries. Whichever you pick, for SPS use keep it **local, or on an approved SPS service** (OneDrive/SharePoint); no Supabase or other third-party cloud storage. |
 | **Does the AI maintain it?** | AI **edits the notes** (living wiki) vs. you **store & search** them (RAG) | A maintained wiki compounds but needs a good operating loop; a store-and-search pile is simpler but doesn't build on itself. This is also the difference between the setups below. |
 | **On new info** | **Regenerate** the page vs. **edit in place** | Both have pros and cons: regenerate keeps a page internally consistent; edit-in-place keeps a living narrative and its history. Worth experimenting with for your workflow. |
 | **Note size** | Human-readable **concept pages** vs. small extracted **atoms** | Concept pages are what you'll read and curate; atoms can retrieve better and suit some workflows or departments. Start page-level unless you have a reason not to. |
