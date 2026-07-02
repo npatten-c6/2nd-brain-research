@@ -8,18 +8,22 @@ set -euo pipefail
 
 BUNDLE="$(cd "$(dirname "$0")/../docs/impl-research" && pwd)"
 
-# OKF reserved filenames (§3.1) + our documented exemptions (see working-notes.md).
-SKIP=("index.md" "log.md" "lens-WIP.md")
+# OKF reserved filenames (§3.1). No exemptions — every concept doc (including
+# those in the tier subfolders sources/ analysis/ recommendations/) needs `type`.
+SKIP=("index.md" "log.md")
 
 fail=0
-for f in "$BUNDLE"/*.md; do
+while IFS= read -r f; do
   base="$(basename "$f")"
+  skip=0
   for s in "${SKIP[@]}"; do
-    [[ "$base" == "$s" ]] && continue 2
+    [[ "$base" == "$s" ]] && skip=1
   done
+  [[ $skip -eq 1 ]] && continue
+  rel="${f#"$BUNDLE"/}"
 
   if [[ "$(head -1 "$f")" != "---" ]]; then
-    echo "FAIL $base — no opening frontmatter '---'"
+    echo "FAIL $rel — no opening frontmatter '---'"
     fail=1
     continue
   fi
@@ -27,13 +31,13 @@ for f in "$BUNDLE"/*.md; do
   # Frontmatter = lines after the opening '---' up to the next '---'.
   fm="$(awk 'NR==1 {next} /^---[[:space:]]*$/ {exit} {print}' "$f")"
   if ! grep -qE '^type:[[:space:]]*[^[:space:]]' <<<"$fm"; then
-    echo "FAIL $base — missing or empty 'type'"
+    echo "FAIL $rel — missing or empty 'type'"
     fail=1
     continue
   fi
 
-  echo "ok   $base"
-done
+  echo "ok   $rel"
+done < <(find "$BUNDLE" -name '*.md' | sort)
 
 if [[ $fail -eq 0 ]]; then
   echo "OKF conformance: PASS"

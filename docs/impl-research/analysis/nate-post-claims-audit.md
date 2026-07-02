@@ -9,7 +9,7 @@ description: "Claims audit of Nate's 'Open Brain' post vs. the code — inventor
 Internal working doc. Goal: strip the persuasion off Nate B. Jones's "Open Brain" post, keep the durable ideas.
 Method: list every assertion (esp. benefit/value claims), score it, ground the assessment in what the **code actually does** (`ob1-ingestion-recon.md` + `ob1-synthesis.md`). When the prose and the repo disagree, the repo wins — it's what they had to build.
 
-Source post: [`nate-post-open-brian.md`](nate-post-open-brian.md). Code recon: [`ob1-ingestion-recon.md`](ob1-ingestion-recon.md). Engineering takeaways: [`ob1-synthesis.md`](ob1-synthesis.md).
+Source post: [`nate-post-open-brian.md`](../sources/nate-post-open-brian.md). Code recon: [`ob1-ingestion-recon.md`](../sources/ob1-ingestion-recon.md). Engineering takeaways: [`ob1-synthesis.md`](ob1-synthesis.md).
 
 Verdict legend:
 - **KEEP** — real idea, well-founded, worth copying.

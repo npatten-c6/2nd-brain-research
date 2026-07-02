@@ -1,4 +1,5 @@
 ---
+type: "primary source - blog post"
 title: "I built an AI Second Brain. It's made me a 10x better GTM leader"
 source: "https://www.kieranflanagan.io/p/i-built-an-ai-second-brain-its-made?has_completed_unsubscribed_unlock=true"
 author:
@@ -9,6 +10,13 @@ description: "The single most impactful thing I've built with AI, and why every 
 tags:
   - "clippings"
 ---
+
+<!--
+SOURCE ARTIFACT — verbatim web clipping of Kieran Flanagan's post (see frontmatter
+`source`/`published`; captured 2026-06-23). Do not edit the body; re-clip to update.
+The worked example here (Obsidian vault + Claude Code, files-as-truth) is a GTM
+practitioner's account, not our recommendation — analysis lives in ../analysis/.
+-->
 ### The single most impactful thing I've built with AI, and why every GTM leader needs one.
 
 What I’ll cover in this post is the single most impactful thing I’ve built with AI. It’s my ‘Second Brain’. I’ve been building it for the past 3 months, and it’s the single most impactful thing I’ve done to become a better GTM leader. It’s fundamentally changed the quality and speed of the decisions I make.

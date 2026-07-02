@@ -179,7 +179,7 @@ here).
 ### Review lens — the SPS AI Builder persona (goal-mode rubric)
 
 Evaluate the result the way the **real primary reader** would, not an idealized one. The persona is
-captured at [`sps-ai-builder-persona.md`](../../docs/impl-research/sps-ai-builder-persona.md)
+captured at [`sps-ai-builder-persona.md`](../../docs/impl-research/sources/sps-ai-builder-persona.md)
 (synthesized from the SPS #guild-ai Slack channel; doubles as an _audience-proxy source_ — home it
 in the proxy tier).
 

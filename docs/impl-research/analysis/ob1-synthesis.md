@@ -9,7 +9,7 @@ description: "Primary OB1 takeaway doc — 18 concept chunks from Nate B. Jones'
 Internal working doc.
 
 Source: `~/Projects/OB1` (Nate B. Jones "Open Brain"). Scouted 2026-06-18 across schemas/server/recipes/skills/docs.
-Companion detail: [`ob1-ingestion-recon.md`](ob1-ingestion-recon.md) (deep dive on the ingest pipeline). Seed idea: [`andrej-wiki-gist.md`](andrej-wiki-gist.md). Format direction: [`knowledge-catalog-patterns.md`](knowledge-catalog-patterns.md) (OKF).
+Companion detail: [`ob1-ingestion-recon.md`](../sources/ob1-ingestion-recon.md) (deep dive on the ingest pipeline). Seed idea: [`andrej-wiki-gist.md`](../sources/andrej-wiki-gist.md). Format direction: [`knowledge-catalog-patterns.md`](../sources/knowledge-catalog-patterns.md) (OKF).
 
 ## TL;DR — the one big inversion
 

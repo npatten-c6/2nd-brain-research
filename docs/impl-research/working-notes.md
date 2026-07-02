@@ -19,7 +19,7 @@ research docs is the bundle [`index.md`](index.md).
 
 ## Working assumptions
 
-- **Format direction — _firm requirement_:** follow Google's Open Knowledge Format (OKF) as the baseline for knowledge files — markdown concept docs with YAML frontmatter and ordinary markdown links. The spec is vendored locally at [okf-spec.md](okf-spec.md) (OKF v0.1). (Upgraded from a ~90% working assumption to a requirement in increment `0006`. The persona-level framing — "the us-builder MUST conform to OKF" — and any conformance checklist are deferred to the Layer 2 persona increment.)
+- **Format direction — _firm requirement_:** follow Google's Open Knowledge Format (OKF) as the baseline for knowledge files — markdown concept docs with YAML frontmatter and ordinary markdown links. The spec is vendored locally at [okf-spec.md](sources/okf-spec.md) (OKF v0.1). (Upgraded from a ~90% working assumption to a requirement in increment `0006`. The persona-level framing — "the us-builder MUST conform to OKF" — and any conformance checklist are deferred to the Layer 2 persona increment.)
 - **"Local-first" means local _data + infrastructure_, NOT local _models_.** Frontier cloud models (Anthropic / OpenAI) are the intended reasoning layer — specifically **Claude Enterprise** as the reference AI (approved + available to all staff at work). ⚠️ This _corrects_ a conflation in the research docs: `ob1-synthesis.md` leans Ollama-first and frames sensitivity gating as "never send to remote model" (#3, #15) — that's backwards from our actual stance. Local models stay an _option_, not the default.
 - **No self-hosted services.** No Supabase / hosted Postgres / servers / Docker daemons that tech & security won't approve or that a non-technical user can't stand up. Storage, index, and infra stay local and simple. Derived stores (SQLite/DuckDB/FTS/vector) are views over files, never the source of truth.
 - **Borrow format and patterns, not services** (e.g. from OKF / Google Knowledge Catalog).
@@ -46,7 +46,7 @@ values as needed rather than forcing a fit. Concept identity is **path-derived**
 checked by [`../../scripts/check-okf.sh`](../../scripts/check-okf.sh).
 
 Exemptions (not bundle concepts, skipped by the check): the reserved
-[`index.md`](index.md), and [`lens-WIP.md`](lens-WIP.md) (our unorganized opinion
+[`index.md`](index.md), and [`lens-WIP.md`](recommendations/lens-WIP.md) (our unorganized opinion
 working file).
 
 ### Layering (`reference` / `lens` / `source`) — informal
@@ -61,8 +61,8 @@ separable from opinion:
 This is now a **loose, informal** distinction, not a frontmatter field. The
 classification of record is OKF `type` (above). The factual/opinion separation
 still matters in practice — facts and decision-neutral analysis live in
-[`prior-art-landscape.md`](prior-art-landscape.md); opinion/recommendations are
-parked in [`lens-WIP.md`](lens-WIP.md), to be reorganized into a persona-structured
+[`prior-art-landscape.md`](analysis/prior-art-landscape.md); opinion/recommendations are
+parked in [`lens-WIP.md`](recommendations/lens-WIP.md), to be reorganized into a persona-structured
 `recommendations-by-persona.md` later.
 
 ## Open threads to research
@@ -71,8 +71,8 @@ parked in [`lens-WIP.md`](lens-WIP.md), to be reorganized into a persona-structu
 - Local tooling stack: search (e.g. `qmd`, SQLite FTS5), graph/backlinks, viewer.
 - Ingest/query/lint workflows and how much to encode in the agent schema.
 - Provenance and guardrails for agent-written notes (citations, grounding, eval).
-- ~~Prior art / existing tools survey~~ — **done**, see [prior-art-landscape.md](prior-art-landscape.md) (Clew `0005`; re-architected into Layer 1 in `0006`). Follow-ups it surfaced (opinion captured in [lens-WIP.md](lens-WIP.md)): (a) **borrow-vs-build spike on Basic Memory** — install + read its sync/schema-tool source, answer "why not fork/extend it?"; (b) **revisit the edit-in-place vs regenerate lean** (synthesis #3) — shipping market leans regenerate (llm_wiki, OB1); (c) **lead with provenance/trust** — the one wedge absent from every neighbor surveyed.
-- **Layer 2 persona re-architecture** (deferred from `0006`): reorganize [lens-WIP.md](lens-WIP.md) into a persona-structured `recommendations-by-persona.md` (us / enterprise non-tech staff / enterprise IT-builder), each a short requirements profile + recommendation pointing into Layer 1 by anchor; add the "us-builder MUST conform to OKF" framing + any OKF conformance checklist.
+- ~~Prior art / existing tools survey~~ — **done**, see [prior-art-landscape.md](analysis/prior-art-landscape.md) (Clew `0005`; re-architected into Layer 1 in `0006`). Follow-ups it surfaced (opinion captured in [lens-WIP.md](recommendations/lens-WIP.md)): (a) **borrow-vs-build spike on Basic Memory** — install + read its sync/schema-tool source, answer "why not fork/extend it?"; (b) **revisit the edit-in-place vs regenerate lean** (synthesis #3) — shipping market leans regenerate (llm_wiki, OB1); (c) **lead with provenance/trust** — the one wedge absent from every neighbor surveyed.
+- **Layer 2 persona re-architecture** (deferred from `0006`): reorganize [lens-WIP.md](recommendations/lens-WIP.md) into a persona-structured `recommendations-by-persona.md` (us / enterprise non-tech staff / enterprise IT-builder), each a short requirements profile + recommendation pointing into Layer 1 by anchor; add the "us-builder MUST conform to OKF" framing + any OKF conformance checklist.
 
 ## Ideas worth considering more:
 
