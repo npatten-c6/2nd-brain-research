@@ -1,13 +1,31 @@
 ---
-type: "AI-synthesis"
+type: "proxy source - repo assessment"
 title: "OB1 Ingestion / Capture / Dedup Recon"
 description: "Deep-dive on OB1's ingestion/capture/dedup pipeline: canonical spine, fingerprint + semantic dedup, job/dry-run model, importer family, prompt-injection hardening."
+source_repo: "https://github.com/NateBJones-Projects/OB1"
+source_ref: "671b923b8319506fd292fb4c6e3ce5a2d09fcce1"
+assessed_date: "2026-07-02"
+assessed_by: "Claude (agent sessions; original recon increment 0002-era, refresh increment 0009)"
+proxy_for: "OB1's ingestion/capture/dedup pipeline — the implementation behind Nate B. Jones's 'Open Brain' post"
+assessment_history:
+  - "2026-06-18 — original recon @ 2a15199"
+  - "2026-07-02 — refreshed @ 671b923 (88 commits later); pipeline sections re-verified, addendum added"
 ---
+
+<!--
+PROXY SOURCE — an assessment of the code, not the code itself; verify against the
+source repo (`source_repo` @ `source_ref` in frontmatter) before relying on a claim.
+To refresh, see ../proxy-source-refresh.md.
+Caveat: the "Local-first:" lines map OB1's design onto our local-first stance —
+that mapping is our analysis braided into the assessment, not a description of OB1.
+-->
 
 # OB1 Ingestion / Capture / Dedup Recon
 
-Source: `~/Projects/OB1/`. Goal: extract durable concepts + pipeline shapes for our local-first build.
+Source: [NateBJones-Projects/OB1](https://github.com/NateBJones-Projects/OB1) @ `671b923` (local clone `~/Projects/OB1/`). Goal: extract durable concepts + pipeline shapes for our local-first build.
 OB1 = Supabase Postgres (`thoughts` table, pgvector), Deno Edge Functions, OpenRouter/OpenAI/Anthropic LLMs. Everything below maps a cloud coupling -> local-first alternative.
+
+All pipeline sections below were written against `2a15199` (2026-06-18) and **re-verified unchanged at `671b923`** (2026-07-02) — the smart-ingest reference implementation did not change in that window. What OB1 *added* in those 88 commits is in the [refresh addendum](#refresh-addendum--what-changed-2a15199--671b923) at the end.
 
 ## The canonical pipeline (the reusable spine)
 
@@ -116,3 +134,55 @@ Group these — they share one shape, differ by parser + dedup mechanism:
 4. `recipes/atomizer/lib/atomize-text.mjs` — standalone atomization w/ heuristic compound detection.
 5. `recipes/adaptive-capture-classification/README.md` — learning-loop confidence gating.
 6. `recipes/chatgpt-conversation-import/README.md` — richest importer (branch resolution, signal filter, pyramid summaries, dual dedup).
+
+---
+
+## Refresh addendum — what changed `2a15199` → `671b923`
+
+Re-assessed 2026-07-02 (88 commits, 2026-06-18 → 2026-07-02; +17,317 / −90 lines across 77 files). The diff is
+almost entirely **additive**: `git diff --stat 2a15199..671b923 -- integrations/smart-ingest/ integrations/_shared/`
+is empty, so every pipeline fact above holds byte-for-byte at HEAD. Spot-verified at `671b923`: type
+allow-list (`index.ts:223-225`), quality gates `MIN_THOUGHT_LENGTH=30` / `MIN_IMPORTANCE=3`
+(`index.ts:61-62`), `CHUNK_WORD_LIMIT=5000` (`index.ts:57`), reconcile thresholds 0.92/0.85
+(`index.ts:58-59`), dry-run + CAS execution (`index.ts:906-919,1058`), `<document>` injection
+wrapping (`index.ts:404`). New subsystems, mostly community contributions:
+
+- **Enhanced MCP server** (`integrations/enhanced-mcp/`, ~2,570 lines) — a second remote MCP server
+  deployed alongside the stock `server/` connector, expanding the tool surface from 4 to 13
+  (`brain_`-prefixed search/list/capture/stats to coexist with the stock names, plus update,
+  full-text search, graph search, entity detail, ops/status tools). Auth is a constant-time
+  `MCP_ACCESS_KEY` header check; service-role (RLS-bypass), wildcard CORS, single-tenant by design.
+- **Consolidation workers** (`integrations/consolidation-workers/`) — post-import quality Edge
+  Functions: a bio worker synthesizing per-person "Who is X" profile thoughts (updated in place,
+  `metadata.generated_by="consolidation-bio"`), and a metadata-norm worker re-classifying
+  weak-metadata thoughts (applies only at LLM confidence >0.8). Both dry-run-first, audit to a
+  `consolidation_log`.
+- **Chrome capture extension** (`integrations/chrome-capture-extension/`, MV3, v0.6.0) — captures
+  Claude.ai / ChatGPT / Gemini conversations from the browser DOM, with local sensitivity +
+  fingerprint dedup before POSTing to a REST gateway (`/open-brain-rest/ingest`); bulk history
+  backfill incl. Gemini via `chrome.debugger`. Notably **not** an MCP client — it uses the REST path.
+- **Gmail smart pull** (`recipes/gmail-smart-pull/`) — offline Node recipe: engagement-filtered Gmail
+  pull, relationship-tier tagging, local sensitivity routing, LLM atomization for long messages.
+  Emits a portable pack JSON; does not write to Supabase itself.
+- **CRM person tiers** (`schemas/crm-person-tiers/`) — `crm_persons` table with a 4-tier
+  `relationship_tier` (connected/contact/known/unknown) + activity-based promotion RPC; leaves the
+  core `thoughts` table untouched.
+- **smart-ingest schema package** (`schemas/smart-ingest/`) — formalizes the `ingestion_jobs` /
+  `ingestion_items` tables the Edge Function already wrote to (states and action vocabulary match
+  §4 above exactly); adds RLS, hot-path indexes, `user_id` multi-tenant columns.
+- **thought-enrichment recipe** (modified, `recipes/thought-enrichment/`) — retroactive/offline
+  classifier writing `type/importance/sensitivity/topics/tags` back onto existing rows; the only
+  in-window modification to an existing pipeline component, and it operates post-hoc.
+
+**Claims this refresh stales or sharpens** (for downstream analysis docs):
+
+- *"Chat-capture-centric ingestion"* — increasingly stale: capture now spans chat webhooks, a
+  browser extension (DOM capture + bulk history), and email pull.
+- *"An MCP server so every AI can query your thoughts"* — imprecise at HEAD: there are now **two**
+  MCP servers, and the newest capture path (Chrome extension) deliberately bypasses MCP for REST.
+- *"Cloud-coupled (Supabase + OpenRouter + Edge Functions)"* — holds for the core and is reinforced
+  (all new Edge Functions are Supabase+OpenRouter), with two softenings: LLM access is now a
+  consistent OpenRouter → OpenAI → Anthropic fallback chain, and gmail-smart-pull runs entirely
+  offline emitting a pack file.
+- *"DB-as-truth"* — not contradicted; **reinforced**. Every new schema explicitly avoids mutating
+  the core `thoughts` table and writes back into `thoughts`/`metadata` as the record of truth.

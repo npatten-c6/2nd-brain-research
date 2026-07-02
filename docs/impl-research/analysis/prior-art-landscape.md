@@ -1,18 +1,24 @@
 ---
-type: "AI-synthesis"
+date: "2026-06-18"
+type: "analysis - landscape survey"
 title: "Prior-Art Landscape"
 description: "Map of the design space: concept/architecture taxonomy (13 axes), the three reference approaches (OKF/Andrej/Nate) with master comparison, 12 shipping-tool instances, and decision-neutral domain observations."
 ---
 
 # Prior-Art Landscape
 
-> **Layer 1 · `reference`** — a _decision/requirement-neutral_ map of the design space and the tools in it. It describes the forks, the archetypes, and the _inherent_ trade-offs **without advocating a choice** for us or any persona. Opinion, recommendations, "what to steal," and per-requirement verdicts live in Layer 2 (see [`lens-WIP.md`](lens-WIP.md)).
+> **Tier 2 · analysis** — a _decision/requirement-neutral_ map of the design space and the tools in it. It describes the forks, the archetypes, and the _inherent_ trade-offs **without advocating a choice** for us or any persona. Opinion, recommendations, "what to steal," and per-persona verdicts live in Tier 3 — the per-persona docs in [`recommendations/`](../recommendations/).
 >
 > "Decision-neutral" ≠ "unopinionated": the selection of axes and the framing of trade-offs embed analysis. What's banished here is _advocacy_ — steal/avoid, borrow-vs-build, niche verdicts, persona recommendations.
 
 **Date:** 2026-06-18. Scope: shipping local-first / LLM-managed PKM & agent-memory tools that solve the same value prop — a knowledge base where an LLM does the bookkeeping and knowledge compounds — plus the three reference _approaches_ (OKF / Andrej / Nate) that frame the space.
 
-**Companion docs:** [`index.md`](index.md) (catalog) · [`working-notes.md`](working-notes.md) (conventions + assumptions) · [`lens-WIP.md`](lens-WIP.md) (Layer 2: our opinions/recommendations, parked & unorganized) · [`okf-andrej-nate-comparison.md`](okf-andrej-nate-comparison.md) (superseded — its reference content is merged here) · source artifacts: [`andrej-wiki-gist.md`](andrej-wiki-gist.md), [`nate-post-open-brian.md`](nate-post-open-brian.md), [`knowledge-catalog-patterns.md`](knowledge-catalog-patterns.md).
+> **Freshness (2026-07-02):** the Nate/OB1 facts here were re-verified against OB1 @ `671b923`
+> (pipeline unchanged; see the [OB1 recon refresh addendum](../sources/ob1-ingestion-recon.md#refresh-addendum--what-changed-2a15199--671b923)).
+> The 12 shipping-tool entries have **not** been re-verified since 2026-06-18 — this space moves
+> weekly; treat version numbers, feature lists, and maintenance status as of that date.
+
+**Companion docs:** [`index.md`](../index.md) (catalog) · [`working-notes.md`](../working-notes.md) (conventions + assumptions) · [`recommendations/`](../recommendations/) (Tier 3: our opinions/recommendations, per persona) · [`okf-andrej-nate-comparison.md`](okf-andrej-nate-comparison.md) (superseded — its reference content is merged here) · source artifacts: [`andrej-wiki-gist.md`](../sources/andrej-wiki-gist.md), [`nate-post-open-brain.md`](../sources/nate-post-open-brain.md), [`knowledge-catalog-patterns.md`](../sources/knowledge-catalog-patterns.md).
 
 ### Verification legend
 
@@ -55,7 +61,7 @@ So OKF answers _what the files look like_, Andrej _how the LLM and human can col
 | **Primary problem solved** | Knowledge **portability/interchange** | **Synthesis & compounding** (beat RAG re-derivation) | **Cross-tool agent memory access**                                 |
 | **Scale target**           | Any                                   | ~100s sources / hundreds of pages                    | Unbounded atom stream                                              |
 
-Sources for this table: OKF — [`knowledge-catalog-patterns.md`](knowledge-catalog-patterns.md); Andrej — [`andrej-wiki-gist.md`](andrej-wiki-gist.md); Nate — [`ob1-synthesis.md`](ob1-synthesis.md), [`ob1-ingestion-recon.md`](ob1-ingestion-recon.md), [`nate-post-claims-audit.md`](nate-post-claims-audit.md).
+Sources for this table: OKF — [`knowledge-catalog-patterns.md`](../sources/knowledge-catalog-patterns.md); Andrej — [`andrej-wiki-gist.md`](../sources/andrej-wiki-gist.md); Nate — [`ob1-synthesis.md`](ob1-synthesis.md), [`ob1-ingestion-recon.md`](../sources/ob1-ingestion-recon.md), [`nate-post-claims-audit.md`](nate-post-claims-audit.md).
 
 ---
 
@@ -121,7 +127,7 @@ Cells abbreviated; see per-tool entries for nuance + citations. Axes 1–8 are t
 
 ## 4. Deployment axes (cross-cutting)
 
-Decision-neutral mapping of each tool onto the deployment forks (axes 9–13). No verdicts — those are persona-dependent and live in Layer 2.
+Decision-neutral mapping of each tool onto the deployment forks (axes 9–13). No verdicts — those are persona-dependent and live in Tier 3 ([`recommendations/`](../recommendations/)).
 
 | Tool                  | Cost model                        | Data residency                                         | Auth / multi-user                    | Setup friction                         | License                                   | Maturity signal                              |
 | --------------------- | --------------------------------- | ------------------------------------------------------ | ------------------------------------ | -------------------------------------- | ----------------------------------------- | -------------------------------------------- |
@@ -142,7 +148,7 @@ Decision-neutral mapping of each tool onto the deployment forks (axes 9–13). N
 
 ## 5. Tool entries (descriptive)
 
-Each entry: what it is, where it sits on the axes, and its _inherent_ trade-offs/limits. Patterns worth borrowing and per-tool verdicts are deliberately omitted here — they're in [`lens-WIP.md`](lens-WIP.md).
+Each entry: what it is, where it sits on the axes, and its _inherent_ trade-offs/limits. Patterns worth borrowing and per-tool verdicts are deliberately omitted here — they're in [`lens-WIP.md`](../recommendations/lens-WIP.md).
 
 ### 5.1 Basic Memory — files-as-truth PKM + native MCP ✅
 
@@ -268,4 +274,4 @@ Trends visible across the surveyed tools, stated without recommending a choice:
 - Obsidian Copilot — repo <https://github.com/logancyang/obsidian-copilot>
 - A-MEM — arxiv <https://arxiv.org/abs/2502.12110>
 - Karpathy LLM-wiki gist (seed reference) — <https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f>
-- Reference-approach table — derived from [`knowledge-catalog-patterns.md`](knowledge-catalog-patterns.md), [`andrej-wiki-gist.md`](andrej-wiki-gist.md), [`ob1-synthesis.md`](ob1-synthesis.md), [`ob1-ingestion-recon.md`](ob1-ingestion-recon.md).
+- Reference-approach table — derived from [`knowledge-catalog-patterns.md`](../sources/knowledge-catalog-patterns.md), [`andrej-wiki-gist.md`](../sources/andrej-wiki-gist.md), [`ob1-synthesis.md`](ob1-synthesis.md), [`ob1-ingestion-recon.md`](../sources/ob1-ingestion-recon.md).

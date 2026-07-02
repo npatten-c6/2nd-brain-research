@@ -1,20 +1,34 @@
 ---
-type: "AI-synthesis"
+type: "proxy source - repo assessment"
 title: "Knowledge Catalog repo patterns"
 description: "Reusable patterns distilled from Google's Knowledge Catalog repo: OKF as minimal 'knowledge as files', metadata-as-code sync, enrichment/discovery pipelines, and a candidate local-first architecture."
+source_repo: "https://github.com/GoogleCloudPlatform/knowledge-catalog"
+source_ref: "ba17dd5"
+assessed_date: "2026-06-18"
+assessed_by: "Claude (agent session, increment 0001)"
+proxy_for: "Google's Knowledge Catalog repo — the OKF format and its metadata/enrichment/discovery agent patterns"
 ---
+
+<!--
+PROXY SOURCE — an assessment of the code, not the code itself; verify against the
+source repo (`source_repo` @ `source_ref` in frontmatter) before relying on a claim.
+To refresh, see ../proxy-source-refresh.md.
+Caveat: the "local-first adaptation" columns and the "Design implications…" /
+"Candidate local architecture" sections are our analysis braided into the
+assessment — read those as Tier-2 material, not as description of the repo.
+-->
 
 # Knowledge Catalog repo patterns
 
-Source repo: [`../knowledge-catalog`](../../../knowledge-catalog/README.md)
+Source repo: [GoogleCloudPlatform/knowledge-catalog @ `ba17dd5`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/ba17dd5/README.md)
 
 This note captures reusable ideas from Google's Knowledge Catalog examples for a local-first second brain / open brain design. It intentionally links to upstream docs instead of restating them.
 
 ## Executive takeaways
 
 - The strongest portable idea is **knowledge as files**: markdown for human/agent-readable content, YAML for structured metadata, git for review/history.
-- OKF is the cleanest minimum viable format: a folder of markdown concept docs with frontmatter and links. See [OKF spec](../../../knowledge-catalog/okf/SPEC.md).
-- Metadata as Code adds a heavier sync model: manifests, resource scopes, YAML asset files, markdown sidecars, reference layers, and push/pull semantics. See [mdcode concept](../../../knowledge-catalog/agents/mdcode/docs/concept.md).
+- OKF is the cleanest minimum viable format: a folder of markdown concept docs with frontmatter and links. See [OKF spec](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/ba17dd5/okf/SPEC.md).
+- Metadata as Code adds a heavier sync model: manifests, resource scopes, YAML asset files, markdown sidecars, reference layers, and push/pull semantics. See [mdcode concept](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/ba17dd5/agents/mdcode/docs/concept.md).
 - The enrichment agents are examples of a **producer pipeline**, not part of the core format.
 - For our local implementation, avoid coupling the durable knowledge representation to a catalog service. Treat SQLite/DuckDB/search indexes as derived views over files, not the source of truth.
 
@@ -22,13 +36,13 @@ This note captures reusable ideas from Google's Knowledge Catalog examples for a
 
 | Component | Source | Essential idea | Local-first adaptation |
 |---|---|---|---|
-| OKF | [README](../../../knowledge-catalog/okf/README.md), [SPEC](../../../knowledge-catalog/okf/SPEC.md) | Vendor-neutral knowledge bundle as markdown + YAML + links | Use as baseline note/concept file format |
-| OKF enrichment agent | [code](../../../knowledge-catalog/okf/src/enrichment_agent/) | Source metadata + web docs -> OKF docs | Replace BigQuery/web crawl with local folders, git repos, PDFs, browser exports, SQLite/DuckDB schemas |
-| OKF viewer | [viewer code](../../../knowledge-catalog/okf/src/enrichment_agent/viewer/) | Parse bundle, extract links, render static graph | Useful pattern for local static visualizations |
-| Metadata as Code / kcmd | [README](../../../knowledge-catalog/agents/mdcode/README.md), [concept](../../../knowledge-catalog/agents/mdcode/docs/concept.md) | Manage metadata as versioned local artifacts with pull/push | Borrow manifest/reference-layer ideas, skip Google sync |
-| Enrichment agent | [README](../../../knowledge-catalog/agents/enrichment/README.md) | Multi-source context routing and doc generation | Borrow routing, provenance, feedback, eval ideas |
-| Discovery agent | [README](../../../knowledge-catalog/samples/discovery/README.md) | Decompose query -> multiple searches -> rerank results | Local search agent can use FTS/vector/hybrid indexes |
-| Evaluation harness | [eval docs in enrichment README](../../../knowledge-catalog/agents/enrichment/README.md#evaluating-the-output) | Score generated metadata for grounding, contradictions, redundancy | Build evals early for local agent outputs |
+| OKF | [README](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/ba17dd5/okf/README.md), [SPEC](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/ba17dd5/okf/SPEC.md) | Vendor-neutral knowledge bundle as markdown + YAML + links | Use as baseline note/concept file format |
+| OKF enrichment agent | [code](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/ba17dd5/okf/src/enrichment_agent/) | Source metadata + web docs -> OKF docs | Replace BigQuery/web crawl with local folders, git repos, PDFs, browser exports, SQLite/DuckDB schemas |
+| OKF viewer | [viewer code](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/ba17dd5/okf/src/enrichment_agent/viewer/) | Parse bundle, extract links, render static graph | Useful pattern for local static visualizations |
+| Metadata as Code / kcmd | [README](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/ba17dd5/agents/mdcode/README.md), [concept](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/ba17dd5/agents/mdcode/docs/concept.md) | Manage metadata as versioned local artifacts with pull/push | Borrow manifest/reference-layer ideas, skip Google sync |
+| Enrichment agent | [README](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/ba17dd5/agents/enrichment/README.md) | Multi-source context routing and doc generation | Borrow routing, provenance, feedback, eval ideas |
+| Discovery agent | [README](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/ba17dd5/samples/discovery/README.md) | Decompose query -> multiple searches -> rerank results | Local search agent can use FTS/vector/hybrid indexes |
+| Evaluation harness | [eval docs in enrichment README](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/ba17dd5/agents/enrichment/README.md#evaluating-the-output) | Score generated metadata for grounding, contradictions, redundancy | Build evals early for local agent outputs |
 
 ## OKF, reduced to its durable core
 

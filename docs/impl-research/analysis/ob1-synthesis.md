@@ -1,5 +1,6 @@
 ---
-type: "AI-synthesis"
+date: "2026-06-18"
+type: "analysis - synthesis"
 title: "OB1 Synthesis — Concept Chunks & Our Options"
 description: "Primary OB1 takeaway doc — 18 concept chunks from Nate B. Jones's 'Open Brain' with our local-first options for each; reframes DB-as-truth into files-as-truth + DB-as-derived-view."
 ---
@@ -8,8 +9,17 @@ description: "Primary OB1 takeaway doc — 18 concept chunks from Nate B. Jones'
 
 Internal working doc.
 
-Source: `~/Projects/OB1` (Nate B. Jones "Open Brain"). Scouted 2026-06-18 across schemas/server/recipes/skills/docs.
-Companion detail: [`ob1-ingestion-recon.md`](ob1-ingestion-recon.md) (deep dive on the ingest pipeline). Seed idea: [`andrej-wiki-gist.md`](andrej-wiki-gist.md). Format direction: [`knowledge-catalog-patterns.md`](knowledge-catalog-patterns.md) (OKF).
+Source: `~/Projects/OB1` (Nate B. Jones "Open Brain"). Scouted 2026-06-18 across schemas/server/recipes/skills/docs, at OB1 commit `2a15199`.
+
+> **Freshness (2026-07-02):** the OB1 proxy source was refreshed at `671b923` (88 commits later) —
+> see the [recon's refresh addendum](../sources/ob1-ingestion-recon.md#refresh-addendum--what-changed-2a15199--671b923).
+> The pipeline facts this synthesis rests on re-verified **unchanged**; DB-as-truth is reinforced.
+> Two chunks are now understated rather than wrong: **#13 (interface)** — OB1 now ships a *second*,
+> 13-tool "enhanced" MCP server alongside the stock 6-tool one, and its newest capture path (a
+> Chrome extension) bypasses MCP for a REST gateway; **capture surfaces (#8/#9-adjacent)** —
+> ingestion now also spans browser DOM capture (Claude/ChatGPT/Gemini, incl. bulk history) and an
+> offline Gmail pull that emits portable pack files. Neither changes our options below.
+Companion detail: [`ob1-ingestion-recon.md`](../sources/ob1-ingestion-recon.md) (deep dive on the ingest pipeline). Seed idea: [`andrej-wiki-gist.md`](../sources/andrej-wiki-gist.md). Format direction: [`knowledge-catalog-patterns.md`](../sources/knowledge-catalog-patterns.md) (OKF).
 
 ## TL;DR — the one big inversion
 

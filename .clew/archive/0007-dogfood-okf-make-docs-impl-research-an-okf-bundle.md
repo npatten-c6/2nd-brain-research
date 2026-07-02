@@ -14,9 +14,9 @@ OKF is now a **firm requirement** for the knowledge base we intend to build (res
 
 ## Current state (conformance gap, checked 2026-06-18)
 
-Against OKF v0.1 §9 ([okf-spec.md](../docs/impl-research/okf-spec.md)):
+Against OKF v0.1 §9 ([okf-spec.md](../../docs/impl-research/sources/okf-spec.md)):
 
-- **Required `type` frontmatter: missing on 10 of 11 docs.** Only `nate-post-open-brian.md` has frontmatter (and a `type: "clipping"`, by accident of how it was clipped). Everything else opens straight into `# Heading`.
+- **Required `type` frontmatter: missing on 10 of 11 docs.** Only `nate-post-open-brain.md` has frontmatter (and a `type: "clipping"`, by accident of how it was clipped). Everything else opens straight into `# Heading`.
 - **`okf-spec.md`** leads with an HTML vendor-banner comment, no frontmatter (it's a `source` artifact — decide whether it gets a concept wrapper or is exempt).
 - **No reserved `index.md` / `log.md`.** `research-index.md` plays the index role but isn't named `index.md` and carries its own H1 (OKF's `index.md` has no frontmatter and a specific listing structure).
 
@@ -38,4 +38,4 @@ Against OKF v0.1 §9 ([okf-spec.md](../docs/impl-research/okf-spec.md)):
 - **Exemptions.** `okf-spec.md` wrapped with frontmatter *above* the vendor banner (spec body untouched). `okf-andrej-nate-comparison.md` wrapped (`AI-synthesis`, frozen note kept). **`lens-WIP.md` excluded** from the bundle (user: it's our working file, not knowledge) — HTML-comment exemption marker added; skipped by `check-okf.sh`.
 - **Concept identity.** Path-derived (OKF §2); no stable frontmatter `id`. Revisit only if a stable id becomes necessary.
 - **`log.md`.** Skipped — git history + Clew suffice for a research bundle.
-- **Bug found + fixed.** `nate-post-open-brian.md` had an unterminated quote in its `description` (unparseable YAML); normalized `type: clipping` → `primary source - blog post` and closed the quote.
+- **Bug found + fixed.** `nate-post-open-brain.md` had an unterminated quote in its `description` (unparseable YAML); normalized `type: clipping` → `primary source - blog post` and closed the quote.

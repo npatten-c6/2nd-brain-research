@@ -14,56 +14,72 @@ research docs is the bundle [`index.md`](index.md).
 
 - **Exploratory, not a product.** Goal is to understand the space and experiment ourselves — not to build or sell into it.
 - **Output = recommendations.** Navigate it for ourselves first, then guide others.
-- **Real eventual audience:** enterprise rollout guidance for our workplace (mid-sized public co., ~3-4k FTEs) — get ahead of every employee rolling their own ad-hoc second brain.
+- **Primary reader (reframed in increment `0009`):** an SPS colleague starting to explore this
+  space — the repo is the one-stop reference so they don't each redo the research. "Us" (the
+  researchers) is now _one persona_ ([`for-us-builders.md`](recommendations/for-us-builders.md)),
+  no longer the default reader. The review lens for the primary reader is the
+  [SPS AI Builder persona](sources/sps-ai-builder-persona.md).
 - **Deployability is a first-class goal:** solutions must be usable by non-technical staff (e.g. GTM teams), not just engineers.
 
 ## Working assumptions
 
-- **Format direction — _firm requirement_:** follow Google's Open Knowledge Format (OKF) as the baseline for knowledge files — markdown concept docs with YAML frontmatter and ordinary markdown links. The spec is vendored locally at [okf-spec.md](okf-spec.md) (OKF v0.1). (Upgraded from a ~90% working assumption to a requirement in increment `0006`. The persona-level framing — "the us-builder MUST conform to OKF" — and any conformance checklist are deferred to the Layer 2 persona increment.)
+- **Format direction — _firm requirement_:** follow Google's Open Knowledge Format (OKF) as the baseline for knowledge files — markdown concept docs with YAML frontmatter and ordinary markdown links. The spec is vendored locally at [okf-spec.md](sources/okf-spec.md) (OKF v0.1). (Upgraded from a ~90% working assumption to a requirement in increment `0006`. The persona-level framing — "the us-builder MUST conform to OKF" — now lives in [for-us-builders.md](recommendations/for-us-builders.md) (`0009`); an OKF conformance checklist remains open.)
 - **"Local-first" means local _data + infrastructure_, NOT local _models_.** Frontier cloud models (Anthropic / OpenAI) are the intended reasoning layer — specifically **Claude Enterprise** as the reference AI (approved + available to all staff at work). ⚠️ This _corrects_ a conflation in the research docs: `ob1-synthesis.md` leans Ollama-first and frames sensitivity gating as "never send to remote model" (#3, #15) — that's backwards from our actual stance. Local models stay an _option_, not the default.
 - **No self-hosted services.** No Supabase / hosted Postgres / servers / Docker daemons that tech & security won't approve or that a non-technical user can't stand up. Storage, index, and infra stay local and simple. Derived stores (SQLite/DuckDB/FTS/vector) are views over files, never the source of truth.
 - **Borrow format and patterns, not services** (e.g. from OKF / Google Knowledge Catalog).
 
 ## Doc conventions
 
+### The 3-tier epistemic ladder (increment `0009`)
+
+Every concept doc lives in one of three tier folders, so a newcomer can tell what kind of thing
+they're reading _before_ opening it — evidence vs analysis vs recommendation:
+
+- **`sources/` — Tier 1, evidence.** External artifacts. Each is **primary** (verbatim copy;
+  don't edit the body, re-import to update) or **proxy** (our commit-pinned assessment standing
+  in for an artifact we didn't vendor). Tier-1 docs carry no advocacy.
+- **`analysis/` — Tier 2, derived analysis.** Maps, audits, syntheses built on Tier 1.
+  Decision-neutral: describes forks and trade-offs, cites the sources it rests on, does not
+  advocate a choice.
+- **`recommendations/` — Tier 3, opinion.** Per-persona recommendations and guides
+  (us-builder / enterprise non-tech staff / enterprise IT-builder, plus the SPS-specific guide).
+  Judgment lives here; evidence is linked (Tier 1/2), not restated. Each guide should be
+  self-contained enough to drop into an agent's context and be useful on its own.
+
+Bundle meta stays at the bundle root: [`index.md`](index.md) (catalog), this file, and
+[`proxy-source-refresh.md`](proxy-source-refresh.md).
+
+**Proxy source discipline.** Every proxy carries (a) a banner — _assessment of the artifact, not
+the artifact; verify against source before relying_ — and (b) a provenance block in frontmatter:
+`source_repo` (or `source` for non-repo proxies), `source_ref` (commit SHA), `assessed_date`,
+`assessed_by`, `proxy_for` (+ `assessment_history` once refreshed). Findings cite `path:line`
+into the source repo; stated intent (README/docs) stays separate from observed implementation
+(code). Refresh procedure: [`proxy-source-refresh.md`](proxy-source-refresh.md).
+
+This supersedes the informal `reference`/`lens`/`source` layering from increment `0006`
+(reference → analysis; lens → recommendations; source → sources, split primary/proxy).
+
 ### `type` frontmatter (OKF)
 
 This folder is dogfooded as an OKF bundle (increment `0007`). Every concept doc
-carries a non-empty `type` in YAML frontmatter — OKF's one hard rule. Values in
-use:
+carries a non-empty `type` in YAML frontmatter — OKF's one hard rule. `type` is the
+machine-readable classification of record and stays in sync with the tier folder:
 
-- **`primary source - <medium>`** — external artifacts imported (near-)verbatim;
-  the medium follows (`primary source - blog post`, `primary source - gist`,
-  `primary source - specification`).
-- **`AI-synthesis`** — docs the agent authored: surveys, recons, syntheses,
-  audits, comparisons.
-- **`working-notes`** — this file: project meta (direction, assumptions,
-  conventions, threads).
+- **`primary source - <medium>`** — Tier 1 primary (`- blog post`, `- gist`, `- specification`).
+- **`proxy source - <kind>`** — Tier 1 proxy (`- repo assessment`, `- persona synthesis`).
+- **`analysis - <kind>`** — Tier 2 (`- landscape survey`, `- synthesis`, `- claims audit`,
+  `- comparison (frozen intermediary)`).
+- **`recommendation - <persona>`** — Tier 3.
+- **`working-notes`**, **`process note`**, **`superseded working file`** — bundle meta and
+  frozen intermediaries.
 
 `type` values are free-form and self-describing (OKF §4.1); add new descriptive
 values as needed rather than forcing a fit. Concept identity is **path-derived**
-(file path minus `.md`, per OKF §2) — no stable frontmatter `id`. Conformance is
-checked by [`../../scripts/check-okf.sh`](../../scripts/check-okf.sh).
-
-Exemptions (not bundle concepts, skipped by the check): the reserved
-[`index.md`](index.md), and [`lens-WIP.md`](lens-WIP.md) (our unorganized opinion
-working file).
-
-### Layering (`reference` / `lens` / `source`) — informal
-
-An older convention (increment `0006`) tagged each doc by layer to keep facts
-separable from opinion:
-
-- **`reference`** — decision/requirement-neutral domain map; describes forks, does not advocate.
-- **`lens`** — opinionated: recommendations, verdicts, "what to steal," per-persona readouts.
-- **`source`** — an imported external artifact we're studying.
-
-This is now a **loose, informal** distinction, not a frontmatter field. The
-classification of record is OKF `type` (above). The factual/opinion separation
-still matters in practice — facts and decision-neutral analysis live in
-[`prior-art-landscape.md`](prior-art-landscape.md); opinion/recommendations are
-parked in [`lens-WIP.md`](lens-WIP.md), to be reorganized into a persona-structured
-`recommendations-by-persona.md` later.
+(file path minus `.md`, per OKF §2) — no stable frontmatter `id`; moving a file is a concept
+rename, so fix inbound links when you move one. Conformance is checked by
+[`../../scripts/check-okf.sh`](../../scripts/check-okf.sh), which recurses the tier folders;
+only the OKF-reserved `index.md`/`log.md` are skipped (the former `lens-WIP.md` exemption is
+gone — it's a frontmattered frozen file now).
 
 ## Open threads to research
 
@@ -71,8 +87,9 @@ parked in [`lens-WIP.md`](lens-WIP.md), to be reorganized into a persona-structu
 - Local tooling stack: search (e.g. `qmd`, SQLite FTS5), graph/backlinks, viewer.
 - Ingest/query/lint workflows and how much to encode in the agent schema.
 - Provenance and guardrails for agent-written notes (citations, grounding, eval).
-- ~~Prior art / existing tools survey~~ — **done**, see [prior-art-landscape.md](prior-art-landscape.md) (Clew `0005`; re-architected into Layer 1 in `0006`). Follow-ups it surfaced (opinion captured in [lens-WIP.md](lens-WIP.md)): (a) **borrow-vs-build spike on Basic Memory** — install + read its sync/schema-tool source, answer "why not fork/extend it?"; (b) **revisit the edit-in-place vs regenerate lean** (synthesis #3) — shipping market leans regenerate (llm_wiki, OB1); (c) **lead with provenance/trust** — the one wedge absent from every neighbor surveyed.
-- **Layer 2 persona re-architecture** (deferred from `0006`): reorganize [lens-WIP.md](lens-WIP.md) into a persona-structured `recommendations-by-persona.md` (us / enterprise non-tech staff / enterprise IT-builder), each a short requirements profile + recommendation pointing into Layer 1 by anchor; add the "us-builder MUST conform to OKF" framing + any OKF conformance checklist.
+- ~~Prior art / existing tools survey~~ — **done**, see [prior-art-landscape.md](analysis/prior-art-landscape.md) (Clew `0005`; re-architected into Layer 1 in `0006`). Follow-ups it surfaced: (a) **borrow-vs-build spike on Basic Memory** — neutral code recon planned as increment `0008` (its output lands as a Tier-1 proxy source; the borrow-vs-build _verdict_ then updates [for-us-builders.md](recommendations/for-us-builders.md)); (b) **revisit the edit-in-place vs regenerate lean** (synthesis #3) — shipping market leans regenerate (llm_wiki, OB1); (c) ~~lead with provenance/trust~~ — adopted as the wedge in [for-us-builders.md](recommendations/for-us-builders.md).
+- ~~**Layer 2 persona re-architecture**~~ (deferred from `0006`) — **done in `0009`**: [lens-WIP.md](recommendations/lens-WIP.md) reorganized into per-persona Tier-3 docs ([us-builders](recommendations/for-us-builders.md) / [enterprise staff](recommendations/for-enterprise-staff.md) / [enterprise IT](recommendations/for-enterprise-it.md)) plus the SPS-specific [sps-guide.md](recommendations/sps-guide.md); "us-builder MUST conform to OKF" captured in that persona's requirements profile. An OKF conformance _checklist_ remains open.
+- **SPS guide upkeep:** [sps-guide.md](recommendations/sps-guide.md) is provisional by design — its SPS policy claims are dated and need periodic re-verification against the DSOL Confluence pages and developer-docs guardrails; open questions are tracked in the guide itself.
 
 ## Ideas worth considering more:
 
