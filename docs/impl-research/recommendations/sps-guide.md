@@ -64,9 +64,9 @@ the maintenance loop you want the AI to run, and where.
    files, plus lint passes for orphans and contradictions.
 
 > **Obsidian at SPS, before you install it:** Security has flagged Obsidian's sync features. Per
-> current guidance (provisional; confirm with Security GRC), **Obsidian Sync and iCloud/cloud vault
+> current guidance (provisional; confirm with Security), **Obsidian Sync and iCloud/cloud vault
 > sync are not approved and must stay off**; do not enable either. Obsidian as a local viewer over
-> files in approved storage is the safe shape; its cloud sync is not.
+> files in approved storage _should_ be safe, its cloud sync is not.
 
 ## Getting started: a concrete starter (option 1)
 
@@ -84,8 +84,7 @@ today with Claude Code and a folder:
      standard links are OKF's convention and the most reliably followed by agents and tools, and
      Obsidian renders them fine too.
 3. **Write the agent's operating instructions**, the "skill" layer where the quality comes from.
-   Put a `CLAUDE.md` in the vault (or the same text as a claude.ai Project instruction or Skill)
-   telling the agent: files are the source of truth; when I share a source, extract the key points
+   Put a `CLAUDE.md` in the vault telling the agent: files are the source of truth; when I share a source, extract the key points
    and file them into the right note; create and update entity pages; keep links and `index.md`
    current; flag contradictions with existing notes; and cite where each claim came from so I can
    trust it.
@@ -94,10 +93,10 @@ today with Claude Code and a folder:
    are your job; the filing and bookkeeping are the agent's.
 5. **Grow only when it hurts.** Add Obsidian for browsing, grep/FTS or a local MCP server for
    retrieval, and a periodic "lint" chat for orphans, contradictions, and stale claims. Start
-   simple and harden what you actually use.
+   simple and expand capabilities as you hit friction. (e.g. if you keep wanting other projects to be able to access and update your 2nd-brain, a local MCP is a way to address that.)
 
 **The one thing to get right is trust.** Because an LLM is writing these notes, have it cite
-sources inline and keep edits reviewable (git diffs). Uncited AI-authored "knowledge" is the
+sources inline and keep edits reviewable (git diffs). Uncited AI-authored "knowledge" is the common
 failure mode, and it's the gap no surveyed tool closes well, so it's worth your attention
 ([why](for-us-builders.md#the-wedge-to-lead-with)).
 
@@ -112,8 +111,8 @@ Reading: [Kieran's writeup](../sources/kieran-ai-second-brain.md) (a real workin
   [AI at SPS](https://spscommerce.sharepoint.com/sites/aiatsps/SitePages/AI%20at%20SPS.aspx);
   follow it.
 - **A local MCP server is worth adding once you want reach.** Its value is querying your brain from
-  other projects and chat sessions instead of always opening a session inside the vault repo.
-  (Reminder: running your own localhost MCP server is fine; just don't expose it beyond your
+  other projects and chat sessions instead of always opening a session inside the vault repo. Starting with a simple skill to guide agents to access the local folder is a simpler starting point.
+  (Reminder: running your own localhost MCP server _should_ be fine; just don't expose it beyond your
   device.)
 - **New vendor tools that touch SPS data trigger GRC review.** Staying on files plus Claude
   Enterprise (the setups above) avoids that entirely, which is a large part of why it's the
