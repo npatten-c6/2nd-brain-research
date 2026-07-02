@@ -14,7 +14,7 @@ OKF is now a **firm requirement** for the knowledge base we intend to build (res
 
 ## Current state (conformance gap, checked 2026-06-18)
 
-Against OKF v0.1 §9 ([okf-spec.md](../docs/impl-research/sources/okf-spec.md)):
+Against OKF v0.1 §9 ([okf-spec.md](../../docs/impl-research/sources/okf-spec.md)):
 
 - **Required `type` frontmatter: missing on 10 of 11 docs.** Only `nate-post-open-brian.md` has frontmatter (and a `type: "clipping"`, by accident of how it was clipped). Everything else opens straight into `# Heading`.
 - **`okf-spec.md`** leads with an HTML vendor-banner comment, no frontmatter (it's a `source` artifact — decide whether it gets a concept wrapper or is exempt).

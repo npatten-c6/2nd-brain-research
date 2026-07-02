@@ -14,7 +14,18 @@ updated_at: 2026-06-21T15:01:52Z
 
 **Repo on disk:** `~/Projects/basic-memory/` (freshly cloned).
 
-**Taxonomy note (decided unless overridden).** This is `type: AI-synthesis` — we author it; it is decision-neutral. It is **not literally a primary source** (the repo is). It *functions* as one by being commit-pinned, citation-anchored (file:line on every claim), and verbatim where it matters (schema, frontmatter contract). Optional add-on, not required: vendor a tiny verbatim slice (DB schema + frontmatter contract only) as a separate thin `primary source` doc.
+**Taxonomy note — updated 2026-07-02 by increment `0009` (supersedes the original note below).**
+The "AI-synthesis that functions as a source" straddle this note wrestled with now has a real
+home: the **proxy source** tier. The output doc should land at
+`docs/impl-research/sources/basic-memory-recon.md` with `type: "proxy source - repo assessment"`,
+the standard proxy banner, and the provenance block (`source_repo`, `source_ref` = pinned commit,
+`assessed_date`, `assessed_by`, `proxy_for`) — see `docs/impl-research/working-notes.md` → Doc
+conventions → Proxy source discipline, and `docs/impl-research/proxy-source-refresh.md` for the
+refresh procedure it should stay compatible with. Everything else in this increment (neutrality
+mandate, subsystem decomposition, citation discipline) stands as written; the commit-pin +
+file:line requirements below are exactly the proxy discipline.
+
+_Original note (kept for lineage):_ This is `type: AI-synthesis` — we author it; it is decision-neutral. It is **not literally a primary source** (the repo is). It *functions* as one by being commit-pinned, citation-anchored (file:line on every claim), and verbatim where it matters (schema, frontmatter contract). Optional add-on, not required: vendor a tiny verbatim slice (DB schema + frontmatter contract only) as a separate thin `primary source` doc.
 
 **Neutrality mandate (the load-bearing constraint).** Describe Basic Memory *on its own terms*. **NO advocacy:** no "what to steal," no "we should," no borrow-vs-build verdict, no fit-to-us framing, no comparison to our design, no recommendations. Those are deferred to a later `lens` increment. (This narrows the original open-thread framing, which bundled the "why not fork it?" verdict in — that verdict is explicitly out of scope here.)
 
@@ -44,7 +55,7 @@ updated_at: 2026-06-21T15:01:52Z
 
 ## Acceptance criteria
 
-- [ ] `docs/impl-research/basic-memory-recon.md` created; OKF-conformant frontmatter (`type: AI-synthesis`, `title`, `description`); commit-pinned provenance banner.
+- [ ] `docs/impl-research/sources/basic-memory-recon.md` created; OKF-conformant frontmatter (`type: "proxy source - repo assessment"`, `title`, `description`, provenance block); commit-pinned proxy banner. _(Path + type updated by `0009`.)_
 - [ ] Component-map table + per-subsystem sections covering at least: source-of-truth/file format, sync, parsing/ingestion, storage/schema, retrieval/graph, agent/MCP interface, CLI/deploy.
 - [ ] Load-bearing structures captured verbatim (DB schema, frontmatter contract) with `path:line` citations.
 - [ ] "Stated intent" vs "observed implementation" separated; aspirational/unmerged parts flagged.

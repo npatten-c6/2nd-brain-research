@@ -1,5 +1,5 @@
 ---
-type: "AI-synthesis"
+type: "analysis - landscape survey"
 title: "Prior-Art Landscape"
 description: "Map of the design space: concept/architecture taxonomy (13 axes), the three reference approaches (OKF/Andrej/Nate) with master comparison, 12 shipping-tool instances, and decision-neutral domain observations."
 ---

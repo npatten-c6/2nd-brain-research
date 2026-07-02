@@ -43,7 +43,11 @@ Proxy (our commit-pinned assessments standing in for artifacts we didn't vendor)
 
 ## Tier 3 — Recommendations
 
-* [Lens (WIP)](recommendations/lens-WIP.md) - frozen pre-0009 opinion holding file; content reorganized into the per-persona docs. Kept for provenance.
+* [Second brains at SPS — start here](recommendations/sps-guide.md) - the SPS-specific guide (provisional, dated): sanctioned stack, data-classification matrix, connector/MCP governance, which approaches clear the SPS bar, open questions + owners.
+* [Recommendations — Us (experimenter/builder)](recommendations/for-us-builders.md) - our design position (OKF format + Andrej workflow + Nate mechanics, all local), borrow-vs-build verdicts, and the provenance wedge.
+* [Recommendations — Enterprise non-technical staff](recommendations/for-enterprise-staff.md) - what a non-technical employee can realistically run today; the install + approval bar; what to avoid.
+* [Recommendations — Enterprise IT / platform builder](recommendations/for-enterprise-it.md) - packaging a sanctioned option org-wide: bless-a-config now, managed local MCP next, and the governance gates that decide success.
+* [Lens (WIP)](recommendations/lens-WIP.md) - frozen pre-0009 opinion holding file; content reorganized into the per-persona docs. Kept for provenance (detailed what-to-steal + deployability tables).
 
 ## Bundle meta
 

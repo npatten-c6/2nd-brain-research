@@ -1,5 +1,5 @@
 ---
-type: "AI-synthesis"
+type: "analysis - claims audit"
 title: 'Nate "Open Brain" Post — Claims Audit'
 description: "Claims audit of Nate's 'Open Brain' post vs. the code — inventories each assertion, scores it, and distills the durable ideas from the persuasion."
 ---

@@ -1,5 +1,5 @@
 ---
-type: "AI-synthesis"
+type: "analysis - comparison (frozen intermediary)"
 title: "OKF vs Andrej vs Nate — Compare / Contrast (superseded)"
 description: "Frozen intermediary artifact — original compare/contrast of the three reference approaches; reference content now merged into prior-art-landscape.md. Kept for provenance."
 ---

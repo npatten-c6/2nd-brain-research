@@ -11,7 +11,7 @@ Working direction: follow Google's Open Knowledge Format (OKF) as the baseline k
 ## Project Structure / Resources
 
 - `docs/` contains project documentation.
-- `docs/impl-research/` collects research on ideas/approaches (dogfooded as an OKF bundle). Start at [`docs/impl-research/index.md`](docs/impl-research/index.md) for the catalog; project direction, working assumptions, and doc conventions live in [`working-notes.md`](docs/impl-research/working-notes.md).
+- `docs/impl-research/` collects the research (dogfooded as an OKF bundle), organized as a 3-tier ladder: `sources/` (Tier 1 — primary + commit-pinned proxy sources), `analysis/` (Tier 2 — decision-neutral), `recommendations/` (Tier 3 — opinion, per persona + the SPS guide). Start at [`docs/impl-research/index.md`](docs/impl-research/index.md) for the catalog; project direction, working assumptions, and doc conventions (tier + `type` vocabulary, proxy discipline) live in [`working-notes.md`](docs/impl-research/working-notes.md). Run `scripts/check-okf.sh` after adding/moving docs.
 - [`style.md`](style.md) — writing & style conventions for project docs. Consult before authoring or editing any markdown.
 
 ## Managing and tracking work
