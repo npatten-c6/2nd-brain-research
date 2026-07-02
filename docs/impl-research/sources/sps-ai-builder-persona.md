@@ -14,6 +14,8 @@ PROXY SOURCE — a synthesized persona, not a verbatim artifact. It stands in fo
 real SPS AI-builder audience, distilled from the #guild-ai Slack channel. Treat its
 claims as a point-in-time reading of that channel (see frontmatter provenance);
 re-derive if the audience shifts. Doubles as the review lens for this repo.
+To refresh, see ../proxy-source-refresh.md (non-repo proxy: re-read the channel
+forward from `source_window` and re-derive).
 -->
 
 # Persona: SPS "AI Builder" (guild-ai, ~60 msgs / 6wk, Jun–Aug 2025)

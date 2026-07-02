@@ -1,12 +1,26 @@
 ---
-type: "AI-synthesis"
+type: "proxy source - repo assessment"
 title: "Knowledge Catalog repo patterns"
 description: "Reusable patterns distilled from Google's Knowledge Catalog repo: OKF as minimal 'knowledge as files', metadata-as-code sync, enrichment/discovery pipelines, and a candidate local-first architecture."
+source_repo: "https://github.com/GoogleCloudPlatform/knowledge-catalog"
+source_ref: "ba17dd5"
+assessed_date: "2026-06-18"
+assessed_by: "Claude (agent session, increment 0001)"
+proxy_for: "Google's Knowledge Catalog repo — the OKF format and its metadata/enrichment/discovery agent patterns"
 ---
+
+<!--
+PROXY SOURCE — an assessment of the code, not the code itself; verify against the
+source repo (`source_repo` @ `source_ref` in frontmatter) before relying on a claim.
+To refresh, see ../proxy-source-refresh.md.
+Caveat: the "local-first adaptation" columns and the "Design implications…" /
+"Candidate local architecture" sections are our analysis braided into the
+assessment — read those as Tier-2 material, not as description of the repo.
+-->
 
 # Knowledge Catalog repo patterns
 
-Source repo: [`../knowledge-catalog`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/ba17dd5/README.md)
+Source repo: [GoogleCloudPlatform/knowledge-catalog @ `ba17dd5`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/ba17dd5/README.md)
 
 This note captures reusable ideas from Google's Knowledge Catalog examples for a local-first second brain / open brain design. It intentionally links to upstream docs instead of restating them.
 

@@ -48,3 +48,4 @@ Proxy (our commit-pinned assessments standing in for artifacts we didn't vendor)
 ## Bundle meta
 
 * [working-notes.md](working-notes.md) - project direction, working assumptions, doc conventions (`type` vocabulary, tiers), and open research threads.
+* [proxy-source-refresh.md](proxy-source-refresh.md) - repeatable procedure for refreshing a commit-pinned proxy source and re-checking downstream analysis; includes the OB1 refresh as worked example.

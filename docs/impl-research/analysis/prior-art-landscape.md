@@ -12,6 +12,11 @@ description: "Map of the design space: concept/architecture taxonomy (13 axes), 
 
 **Date:** 2026-06-18. Scope: shipping local-first / LLM-managed PKM & agent-memory tools that solve the same value prop — a knowledge base where an LLM does the bookkeeping and knowledge compounds — plus the three reference _approaches_ (OKF / Andrej / Nate) that frame the space.
 
+> **Freshness (2026-07-02):** the Nate/OB1 facts here were re-verified against OB1 @ `671b923`
+> (pipeline unchanged; see the [OB1 recon refresh addendum](../sources/ob1-ingestion-recon.md#refresh-addendum--what-changed-2a15199--671b923)).
+> The 12 shipping-tool entries have **not** been re-verified since 2026-06-18 — this space moves
+> weekly; treat version numbers, feature lists, and maintenance status as of that date.
+
 **Companion docs:** [`index.md`](../index.md) (catalog) · [`working-notes.md`](../working-notes.md) (conventions + assumptions) · [`lens-WIP.md`](../recommendations/lens-WIP.md) (Layer 2: our opinions/recommendations, parked & unorganized) · [`okf-andrej-nate-comparison.md`](okf-andrej-nate-comparison.md) (superseded — its reference content is merged here) · source artifacts: [`andrej-wiki-gist.md`](../sources/andrej-wiki-gist.md), [`nate-post-open-brian.md`](../sources/nate-post-open-brian.md), [`knowledge-catalog-patterns.md`](../sources/knowledge-catalog-patterns.md).
 
 ### Verification legend
