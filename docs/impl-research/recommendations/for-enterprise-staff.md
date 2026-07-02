@@ -39,7 +39,18 @@ Architecture quality does not pick the winner here; the **install + approval bar
   stacks like Mem0/Letta/Cognee), single-dev desktop apps with their own API-key wiring
   (nashsu/llm_wiki — also GPL-3), and cloud-hosted options where notes leave approved storage.
 
-Full deployability table: [`lens-WIP.md` §"Enterprise-deployability lens"](lens-WIP.md#enterprise-deployability-lens-opinionated).
+Per-tool readout (as of 2026-06-18; tool entries with evidence in the
+[landscape](../analysis/prior-art-landscape.md)):
+
+| Tool | Deployable by non-tech staff? | What it needs | Verdict for enterprise rollout |
+|---|---|---|---|
+| **Sanctioned AI + local MCP server** (e.g. Basic Memory) | 🟡 Medium | Local MCP server; connect from the AI client. Files on disk, no DB server. | **Best fit in spirit** — but MCP setup is still technical; needs one-click/managed install to clear the bar. |
+| **Obsidian + plugins** (Smart Connections, Copilot) | ✅ High | Install Obsidian + a plugin; point at a model. | **Most realistic for broad staff** today. Weakest on "LLM maintains the wiki," strongest on adoptability. |
+| **nashsu/llm_wiki** | ✅ High (single user) | Desktop app install; bring an API key. | Good adoptability as an app; but individual desktop tool, GPL-3, regenerate-model — not an org-sanctioned platform. |
+| **Khoj (self-host)** | ❌ Low | Server + DB, Docker; or cloud (data leaves). | Self-host fails no-infra; cloud fails data-residency. Org-hosted = a real IT project. |
+| **AnythingLLM (desktop)** | ✅ High (desktop) / ❌ (Docker) | Desktop one-click + bundled vector DB; multi-user is Docker. | Desktop edition is staff-deployable; but document-RAG chat, not a compounding wiki. |
+| **Mem0 / Letta / Cognee** | ❌ Low | Python, infra, vector/graph DBs. | Building blocks for builders, not end-user tools. |
+| **sqlite-memory** | ❌ Low | Dev tool (SQL ext / CLI). | Infra/plumbing, not an end-user product. |
 
 ## What to tell this persona
 

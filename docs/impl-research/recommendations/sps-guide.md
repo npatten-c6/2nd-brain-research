@@ -37,9 +37,11 @@ date: "2026-07-02"
 
 **Builder use (Claude Code + local files — the Kieran pattern, SPS edition):**
 
-1. Request **Claude Code** access via the standard IAM ticket desk; support lives in
-   **#claude-users** ([developer docs](https://developer.docs.spscommerce.com/ai/tools/claude-code),
-   fetched 2026-07-02).
+1. Request **Claude Code** access via the standard IAM ticket desk; sign-in is SSO via MySPS
+   (Okta); support lives in **#claude-users**
+   ([developer docs](https://developer.docs.spscommerce.com/ai/tools/claude-code), fetched
+   2026-07-02). The docs don't say whether any separate Okta app step is involved — ask in
+   #claude-users if your request stalls.
 2. Point it at a local folder of markdown notes — the
    [Kieran worked example](../sources/kieran-ai-second-brain.md) (Obsidian vault + Claude Code)
    is the closest published shape to what works here: files-as-truth, sanctioned AI, no new vendor.

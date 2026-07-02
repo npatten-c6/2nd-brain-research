@@ -1,4 +1,5 @@
 ---
+date: "2026-06-18"
 type: "analysis - landscape survey"
 title: "Prior-Art Landscape"
 description: "Map of the design space: concept/architecture taxonomy (13 axes), the three reference approaches (OKF/Andrej/Nate) with master comparison, 12 shipping-tool instances, and decision-neutral domain observations."
@@ -6,7 +7,7 @@ description: "Map of the design space: concept/architecture taxonomy (13 axes), 
 
 # Prior-Art Landscape
 
-> **Layer 1 · `reference`** — a _decision/requirement-neutral_ map of the design space and the tools in it. It describes the forks, the archetypes, and the _inherent_ trade-offs **without advocating a choice** for us or any persona. Opinion, recommendations, "what to steal," and per-requirement verdicts live in Layer 2 (see [`lens-WIP.md`](../recommendations/lens-WIP.md)).
+> **Tier 2 · analysis** — a _decision/requirement-neutral_ map of the design space and the tools in it. It describes the forks, the archetypes, and the _inherent_ trade-offs **without advocating a choice** for us or any persona. Opinion, recommendations, "what to steal," and per-persona verdicts live in Tier 3 — the per-persona docs in [`recommendations/`](../recommendations/).
 >
 > "Decision-neutral" ≠ "unopinionated": the selection of axes and the framing of trade-offs embed analysis. What's banished here is _advocacy_ — steal/avoid, borrow-vs-build, niche verdicts, persona recommendations.
 
@@ -17,7 +18,7 @@ description: "Map of the design space: concept/architecture taxonomy (13 axes), 
 > The 12 shipping-tool entries have **not** been re-verified since 2026-06-18 — this space moves
 > weekly; treat version numbers, feature lists, and maintenance status as of that date.
 
-**Companion docs:** [`index.md`](../index.md) (catalog) · [`working-notes.md`](../working-notes.md) (conventions + assumptions) · [`lens-WIP.md`](../recommendations/lens-WIP.md) (Layer 2: our opinions/recommendations, parked & unorganized) · [`okf-andrej-nate-comparison.md`](okf-andrej-nate-comparison.md) (superseded — its reference content is merged here) · source artifacts: [`andrej-wiki-gist.md`](../sources/andrej-wiki-gist.md), [`nate-post-open-brian.md`](../sources/nate-post-open-brian.md), [`knowledge-catalog-patterns.md`](../sources/knowledge-catalog-patterns.md).
+**Companion docs:** [`index.md`](../index.md) (catalog) · [`working-notes.md`](../working-notes.md) (conventions + assumptions) · [`recommendations/`](../recommendations/) (Tier 3: our opinions/recommendations, per persona) · [`okf-andrej-nate-comparison.md`](okf-andrej-nate-comparison.md) (superseded — its reference content is merged here) · source artifacts: [`andrej-wiki-gist.md`](../sources/andrej-wiki-gist.md), [`nate-post-open-brain.md`](../sources/nate-post-open-brain.md), [`knowledge-catalog-patterns.md`](../sources/knowledge-catalog-patterns.md).
 
 ### Verification legend
 
@@ -126,7 +127,7 @@ Cells abbreviated; see per-tool entries for nuance + citations. Axes 1–8 are t
 
 ## 4. Deployment axes (cross-cutting)
 
-Decision-neutral mapping of each tool onto the deployment forks (axes 9–13). No verdicts — those are persona-dependent and live in Layer 2.
+Decision-neutral mapping of each tool onto the deployment forks (axes 9–13). No verdicts — those are persona-dependent and live in Tier 3 ([`recommendations/`](../recommendations/)).
 
 | Tool                  | Cost model                        | Data residency                                         | Auth / multi-user                    | Setup friction                         | License                                   | Maturity signal                              |
 | --------------------- | --------------------------------- | ------------------------------------------------------ | ------------------------------------ | -------------------------------------- | ----------------------------------------- | -------------------------------------------- |

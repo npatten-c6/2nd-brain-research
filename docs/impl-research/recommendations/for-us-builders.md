@@ -56,8 +56,25 @@ unique**, and we are not first ([landscape §5](../analysis/prior-art-landscape.
   rerank, skip-unchanged cache); don't depend on it (GPL-3 desktop app; regenerate posture).
 - **Khoj** — borrow retrieval mechanics (bi-encoder → cross-encoder); don't adopt its
   read-only/DB-as-index architecture.
-- Full what-to-steal table with fork mappings: [`lens-WIP.md` §"What to steal"](lens-WIP.md#what-to-steal-per-closest-neighbor)
-  (frozen, still accurate as of 2026-06-18).
+
+## What to steal — cross-tool patterns
+
+(As of 2026-06-18; "#n" = concept-chunk numbers in [`ob1-synthesis.md`](../analysis/ob1-synthesis.md).)
+
+| Pattern | Source(s) | Ties to our fork / agenda |
+|---|---|---|
+| `schema_validate`/`infer`/`diff` as agent tools | Basic Memory | write-back contract (#5); frontmatter-corruption risk |
+| Observations + typed relations parsed from human-readable pages | Basic Memory | page-vs-atom (#2) — "note = file unit, atom = derived" |
+| 3-layer raw/wiki/schema layout as a shipped reference | nashsu/llm_wiki | validates our layering (#1) |
+| 4-signal graph relevance rerank | nashsu/llm_wiki | retrieval/rerank (#11); entity-graph (#8) |
+| SHA256 skip-unchanged + guaranteed-coverage ingest | nashsu/llm_wiki (≈ OB1 fingerprint) | dedup/idempotency (#6) |
+| Bi-encoder retrieve → cross-encoder rerank | Khoj | two-stage semantic retrieval (#3/#11) |
+| Configurable FTS5 ↔ vector weight; local embeddings in one SQLite file | sqlite-memory | SQLite + FTS5 + sqlite-vec derived store (#3/#4) |
+| Local on-device embeddings in a hidden sidecar dir | Smart Connections | DB-as-derived-view-beside-files (#1); Obsidian-as-UI (#17) |
+| Ontology generation + auto-routing recall | Cognee | entity-graph (#8); schema-aware routing (#11) |
+| MCP behavior-hint annotations on write tools | Basic Memory | interface/agent-access safety (#13) |
+| Local stdio/loopback MCP server (`127.0.0.1`) | nashsu/llm_wiki, Basic Memory | interface (#13) — local-MCP over hosted-HTTP |
+| Memory-evolution caution (LLM rewriting old notes drifts/bloats) | A-MEM (research) | edit-in-place-vs-regenerate (#3); lint (#12); fluff-accumulation risk |
 
 ## The wedge to lead with
 

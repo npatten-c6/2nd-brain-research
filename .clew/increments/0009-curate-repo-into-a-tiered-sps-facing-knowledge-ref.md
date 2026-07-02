@@ -66,7 +66,7 @@ travels further than any rule.
 
 - **Tier 1 — Sources.** Each marked **primary** (verbatim external artifact) _or_ **proxy** (our
   commit-pinned assessment standing in for a repo we didn't vendor).
-  - Primary today: `andrej-wiki-gist.md`, `nate-post-open-brian.md`, `okf-spec.md`, the Kieran
+  - Primary today: `andrej-wiki-gist.md`, `nate-post-open-brain.md`, `okf-spec.md`, the Kieran
     "AI Second Brain" post.
   - Proxy today: `knowledge-catalog-patterns.md`, `ob1-ingestion-recon.md`, and the in-flight
     Basic Memory recon (increment `0008`). These are the awkward "AI-synthesis that functions as a
@@ -277,17 +277,29 @@ All work lands on a **branch** (no human gates); the goal criteria above are the
 
 ## Tasks
 
-- [ ] Cut a branch off `main` (e.g. `curate/0009-tiered-sps-reference`).
-- [ ] Draft the tier folder layout + file→tier mapping; move files; fix all cross-links; sync `type`
-      frontmatter; re-run `check-okf.sh`.
-- [ ] Add proxy banners + provenance blocks to existing proxies; home the persona doc in the proxy tier.
-- [ ] Rebuild OB1 proxy at HEAD; re-check downstream analysis; write the refresh note.
-- [ ] Gather + cite SPS facts (SPS Developer MCP); write the provisional, self-contained SPS Tier-3
-      guide (working understanding + open questions + owner routing; advanced + everyday use cases).
-- [ ] Reorganize `lens-WIP.md` into Tier-3 per-persona recommendations.
-- [ ] Rewrite root `README.md` as the newcomer-first front door.
-- [ ] Reconcile `0008` into the proxy tier; update `working-notes.md` conventions + open threads.
+- [x] Cut a branch off `main` (`curate/0009-tiered-sps-reference`).
+- [x] Draft the tier folder layout + file→tier mapping; move files; fix all cross-links; sync `type`
+      frontmatter; re-run `check-okf.sh`. _(Folders: `sources/` `analysis/` `recommendations/`;
+      Kieran post renamed `kieran-ai-second-brain.md` + given `type`; check-okf now recurses.)_
+- [x] Add proxy banners + provenance blocks to existing proxies; home the persona doc in the proxy tier.
+      _(knowledge-catalog-patterns pinned to GitHub @ `ba17dd5` — the local clone was gone, so its
+      relative links were already dead; braided-analysis caveat added to both repo-assessment proxies.)_
+- [x] Rebuild OB1 proxy at HEAD; re-check downstream analysis; write the refresh note.
+      _(`2a15199` → `671b923`, 88 commits: assessed pipeline byte-for-byte unchanged; additive
+      subsystems catalogued in a refresh addendum; freshness notes added to prior-art-landscape,
+      ob1-synthesis, nate-post-claims-audit — no verdict flips; `proxy-source-refresh.md` written.)_
+- [x] Gather + cite SPS facts (SPS Developer MCP); write the provisional, self-contained SPS Tier-3
+      guide. _(`recommendations/sps-guide.md`. ⚠️ Contradiction with this increment's anchor facts:
+      developer docs still document Copilot as live/requestable; no sunset evidence on the fetched
+      pages — written up as unresolved + routed to Enterprise AI & Analytics.)_
+- [x] Reorganize `lens-WIP.md` into Tier-3 per-persona recommendations. _(`for-us-builders.md`,
+      `for-enterprise-staff.md`, `for-enterprise-it.md`; lens-WIP frozen with superseded banner —
+      kept per the preserve-intermediaries convention.)_
+- [x] Rewrite root `README.md` as the newcomer-first front door.
+- [x] Reconcile `0008` into the proxy tier (taxonomy note updated in place, original kept for
+      lineage; output path now `sources/basic-memory-recon.md`); update `working-notes.md`
+      conventions + open threads.
 - [ ] Run the in-character persona review sub-agent against the 6-point checklist; fix flagged gaps;
-      re-run until it passes (or gaps recorded).
+      re-run until it passes (or gaps recorded). _(In flight.)_
 - [ ] Write the decision summary; final pass: verify firm invariants + goal criteria; spot-check
       provenance/freshness on a few claims.

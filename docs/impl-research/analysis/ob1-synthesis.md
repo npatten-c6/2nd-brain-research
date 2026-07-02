@@ -1,4 +1,5 @@
 ---
+date: "2026-06-18"
 type: "analysis - synthesis"
 title: "OB1 Synthesis — Concept Chunks & Our Options"
 description: "Primary OB1 takeaway doc — 18 concept chunks from Nate B. Jones's 'Open Brain' with our local-first options for each; reframes DB-as-truth into files-as-truth + DB-as-derived-view."

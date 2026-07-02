@@ -1,4 +1,5 @@
 ---
+date: "2026-06-18"
 type: "analysis - claims audit"
 title: 'Nate "Open Brain" Post — Claims Audit'
 description: "Claims audit of Nate's 'Open Brain' post vs. the code — inventories each assertion, scores it, and distills the durable ideas from the persuasion."
@@ -9,7 +10,7 @@ description: "Claims audit of Nate's 'Open Brain' post vs. the code — inventor
 Internal working doc. Goal: strip the persuasion off Nate B. Jones's "Open Brain" post, keep the durable ideas.
 Method: list every assertion (esp. benefit/value claims), score it, ground the assessment in what the **code actually does** (`ob1-ingestion-recon.md` + `ob1-synthesis.md`). When the prose and the repo disagree, the repo wins — it's what they had to build.
 
-Source post: [`nate-post-open-brian.md`](../sources/nate-post-open-brian.md). Code recon: [`ob1-ingestion-recon.md`](../sources/ob1-ingestion-recon.md). Engineering takeaways: [`ob1-synthesis.md`](ob1-synthesis.md).
+Source post: [`nate-post-open-brain.md`](../sources/nate-post-open-brain.md). Code recon: [`ob1-ingestion-recon.md`](../sources/ob1-ingestion-recon.md). Engineering takeaways: [`ob1-synthesis.md`](ob1-synthesis.md).
 
 > **Freshness (2026-07-02):** audited against OB1 @ `2a15199` (2026-06-18); the proxy source has
 > since been refreshed at `671b923`. The audited pipeline is unchanged at HEAD, so **no verdict
