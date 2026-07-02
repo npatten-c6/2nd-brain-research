@@ -254,26 +254,29 @@ Keep it scannable in under a minute — that is itself a test of whether you int
 
 All work lands on a **branch** (no human gates); the goal criteria above are the bar. Concretely:
 
-- [ ] Work done on a new branch off `main`; ends with a super-concise **decision summary**
+- [x] Work done on branch `curate/0009-tiered-sps-reference`; decision summary in `DECISIONS.md`
       (bullets + SPS-claims-to-verify + deviations + open gaps), scannable in <1 min.
-- [ ] Repo reorganized into 3 legible tiers (folders + synced `type` frontmatter); every doc placed;
-      `scripts/check-okf.sh` passes; all cross-links fixed.
-- [ ] Tier-1 sources marked primary vs proxy; each proxy carries banner + provenance block
-      (`source_repo`/`source`, `source_ref`, `assessed_date`, `assessed_by`, proxy-for).
-- [ ] OB1 proxy rebuilt at current HEAD; downstream Tier-2 analysis re-checked/flagged; a reusable
-      "how to refresh a proxy source" note exists.
-- [ ] Dedicated, provisional SPS Tier-3 guide exists: self-contained/droppable, dated, cited + dated
-      SPS facts, open questions, routes to owning teams; no policy asserted as definitive; names real
-      SPS friction; covers advanced + everyday use cases.
-- [ ] Root `README.md` is a thin, newcomer-first front door with intent-based routing; catalog not
-      duplicated; three personas preserved as Tier-3 structure.
-- [ ] `lens-WIP.md` reorganized into Tier-3 per-persona recommendations (fact-free pointers into
-      Tier 2).
-- [ ] Persona review pass run in-character; its 6-point checklist satisfied (or gaps listed in the
-      decision summary); persona doc homed as an audience-proxy source.
-- [ ] `0008` reconciled into the proxy tier (coordinated, not silently overwritten).
-- [ ] `working-notes.md` updated: new tier convention documented; open threads reconciled.
-- [ ] Firm invariants hold (or any rebuttal is recorded in the decision summary with its why).
+- [x] Repo reorganized into 3 legible tiers (folders + synced `type` frontmatter); every doc placed;
+      `scripts/check-okf.sh` passes; all cross-links fixed (link-checker: 0 broken).
+- [x] Tier-1 sources marked primary vs proxy; each proxy carries banner + provenance block.
+- [x] OB1 proxy rebuilt at `671b923`; downstream Tier-2 analysis re-checked/flagged (no verdict
+      flips); `proxy-source-refresh.md` written with the OB1 refresh as worked example.
+- [x] Provisional SPS Tier-3 guide exists (`recommendations/sps-guide.md`): self-contained, dated,
+      cited + dated SPS facts, open questions, owner routing; policy written as provisional; names
+      real friction (data classification, registry/intake, SECGRC, MDM/device trust); covers
+      builder + everyday use.
+- [x] Root `README.md` is a thin intent-routed front door; catalog not duplicated; three personas
+      preserved as Tier-3 structure (+ SPS guide as their concrete instantiation).
+- [x] `lens-WIP.md` reorganized into per-persona recommendations. _(Deviation recorded: successors
+      are self-contained judgment with linked evidence — and inline the two load-bearing tables —
+      rather than strictly fact-free pointers; resolves this increment's own droppability tension.)_
+- [x] Persona review run in-character: **6/6 PASS**; polish items fixed (tables inlined, Layer→Tier
+      vocab, `open-brian`→`open-brain` rename, `date:` on Tier-2 docs); residual gaps in
+      `DECISIONS.md`. Persona doc homed at `sources/sps-ai-builder-persona.md`.
+- [x] `0008` reconciled into the proxy tier (taxonomy note updated in place; original kept).
+- [x] `working-notes.md` updated: tier convention + type vocab + proxy discipline; threads reconciled.
+- [x] Firm invariants hold; deviations recorded in `DECISIONS.md` (none rebut an invariant — the
+      braided-analysis caveat in two proxies is flagged in their banners rather than split out).
 
 ## Tasks
 
@@ -299,7 +302,8 @@ All work lands on a **branch** (no human gates); the goal criteria above are the
 - [x] Reconcile `0008` into the proxy tier (taxonomy note updated in place, original kept for
       lineage; output path now `sources/basic-memory-recon.md`); update `working-notes.md`
       conventions + open threads.
-- [ ] Run the in-character persona review sub-agent against the 6-point checklist; fix flagged gaps;
-      re-run until it passes (or gaps recorded). _(In flight.)_
-- [ ] Write the decision summary; final pass: verify firm invariants + goal criteria; spot-check
-      provenance/freshness on a few claims.
+- [x] Run the in-character persona review sub-agent against the 6-point checklist; fix flagged gaps.
+      _(6/6 PASS on first run; weak sub-points + gripes fixed same-day; residuals in DECISIONS.md.)_
+- [x] Write the decision summary (`DECISIONS.md`); final pass done: check-okf PASS, 0 broken links,
+      provenance spot-checks (OB1 constants re-verified at `671b923` path:line; OKF pin `ba17dd5`;
+      SPS claims each carry source + fetch date + owning team).
