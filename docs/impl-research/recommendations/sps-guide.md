@@ -1,197 +1,131 @@
 ---
 type: "recommendation - SPS colleague (staff + builder)"
 title: "Second brains at SPS — start here"
-description: "Provisional guide for SPS colleagues: what's sanctioned, what the real constraints are (data classification, connector governance, device trust), which second-brain approaches clear the SPS bar today, and who owns the answers."
+description: "For an SPS colleague exploring second brains: the mental model (what an LLM-wiki / open-brain / second-brain actually is and how the approaches differ), your options ranked simplest-to-most-capable, and a concrete getting-started recipe. Governance is pointed to, not restated."
 date: "2026-07-02"
 ---
 
 # Second brains at SPS — start here
 
-> **Tier 3 · opinion · ⚠️ provisional.** Written 2026-07-02 from the SPS Developer MCP (developer
-> docs + DSOL Confluence). This is a **working understanding, not policy** — every SPS claim below
-> is dated and cites its source; the governance surface changes weekly, so verify anything
-> load-bearing against the cited page and the owning team before acting. Corrections welcome —
-> this guide is meant to be iterated with input from the teams named below.
->
-> Self-contained by design: you can paste this one file into an agent's context and act on it.
-> Evidence and deeper analysis live in [Tier 2](../analysis/prior-art-landscape.md) /
-> [Tier 1](../index.md) — linked, not required.
+> **Tier 3 · opinion · ⚠️ provisional (2026-07-02).** This gives you the _mental model_ and a
+> _getting-started path_ — the things not already documented elsewhere. It deliberately does **not**
+> re-explain Claude Enterprise, MCP, or AI policy; those live in
+> [AI at SPS](https://spscommerce.sharepoint.com/sites/aiatsps/SitePages/AI%20at%20SPS.aspx) and the
+> developer guardrails, and are pointed to below. Evidence for the claims here lives in
+> [Tier 2 analysis](../analysis/prior-art-landscape.md) and [Tier 1 sources](../index.md).
 
-## TL;DR — what to actually do
+## What a "second brain" actually is
 
-**Everyday use (no build, no approvals):**
+Normally an LLM answers from raw documents at query time (RAG): it re-reads and re-derives
+everything on every question, and nothing accumulates. A **second brain** flips that — the LLM
+**builds and maintains a persistent, interlinked set of markdown notes** that sits between you and
+your raw sources. You feed it material and ask questions; it does the filing, summarizing,
+cross-linking, and contradiction-flagging. The knowledge is compiled once and kept current, so it
+_compounds_ instead of being rediscovered each time ([the seed idea, Karpathy](../sources/andrej-wiki-gist.md)).
 
-1. Use **Claude Enterprise** — sign in with SPS SSO (claude.ai with your `@spscommerce.com`
-   account; personal accounts can't attach corporate connectors — verified-domain restriction,
-   [Decision Log](https://atlassian.spscommerce.com/wiki/spaces/DSOL/pages/780118458), 2026-06-17).
-   Projects, chat, file uploads, web search, artifacts, and per-user **memory** are enabled
-   (Decision Log, as of 2026-07-01).
-2. Keep your notes as **plain markdown files** in approved storage (OneDrive/SharePoint per the
-   [data-classification guardrail](https://developer.docs.spscommerce.com/guardrails/data-classification)).
-   Markdown is the exit story: every credible tool in this space can adopt a folder of markdown
-   later.
-3. Respect the **data-classification → AI matrix** ([below](#data-classification--what-may-go-in-a-second-brain))
-   — it governs what may go in your notes and which AI may touch them.
-4. Small tasks count. The same setup handles "fix this Excel formula," "summarize this meeting
-   transcript," and "draft this post" — don't wait for an advanced use case.
+The names you'll hear are the same idea from different angles — don't get hung up on branding:
 
-**Builder use (Claude Code + local files — the Kieran pattern, SPS edition):**
+- **"LLM wiki"** — the workflow/philosophy: an AI-maintained living wiki you curate ([Karpathy gist](../sources/andrej-wiki-gist.md)).
+- **"Open Brain"** — one specific *product* built on the idea: Postgres + MCP, cloud-hosted ([Nate B. Jones](../sources/nate-post-open-brain.md)). Useful to learn from; **not** the shape we'd copy (see forks below).
+- **"AI second brain"** — a GTM leader's actual working setup: an Obsidian vault + Claude Code ([Kieran Flanagan](../sources/kieran-ai-second-brain.md)). The closest published example to what works at SPS.
+- **"PKM" (personal knowledge management)** — the broad category all of these sit in.
 
-1. Request **Claude Code** access via the standard IAM ticket desk; sign-in is SSO via MySPS
-   (Okta); support lives in **#claude-users**
-   ([developer docs](https://developer.docs.spscommerce.com/ai/tools/claude-code), fetched
-   2026-07-02). The docs don't say whether any separate Okta app step is involved — ask in
-   #claude-users if your request stalls.
-2. Point it at a local folder of markdown notes — the
-   [Kieran worked example](../sources/kieran-ai-second-brain.md) (Obsidian vault + Claude Code)
-   is the closest published shape to what works here: files-as-truth, sanctioned AI, no new vendor.
-3. Auto-permissions mode is security-approved (with bypass mode disabled org-wide); local MCP
-   servers are **currently unconstrained** by managed settings — but treat that as point-in-time,
-   not a blessing ([below](#connector--mcp-governance-the-approval-reality)).
-4. Anything beyond personal files — a shared system, a new connector, a vendor tool — enters the
-   **Claude Platform intake process**. Budget for it; don't route around it.
+## The forks that change your experience
 
-## The sanctioned stack (as of 2026-07, provisional)
+Four choices separate the approaches. Knowing where you sit on each is the whole mental model:
 
-- **Claude Enterprise is the governed enterprise AI.** SPS runs a dedicated org with SSO/domain
-  capture, SCIM, restricted org creation, a contractual no-training clause, and a full
-  decision log of admin settings — the governance surface lives in the **DSOL** Confluence space
-  (_Claude Enterprise — Decision Log_, page 780118458, v4 2026-07-02; _Organizational Settings &
-  Admin Reference_, 769063006, updated 2026-07-01). Owner: **Enterprise AI & Analytics** (platform
-  owner); security posture: **AI Enablement / Cyber Engineering & Defense**.
-- **Application/system-level inference runs on AWS Bedrock** — the AI-agents guardrail's golden
-  path deploys agents to Atlas EKS / Bedrock with SECOPS approval per agent
-  ([/guardrails/ai-agents](https://developer.docs.spscommerce.com/guardrails/ai-agents),
-  fetched 2026-07-02). Your personal second brain is *not* this path; an org-deployed knowledge
-  service would be.
-- **⚠️ Unresolved — Copilot/Cursor status.** Our planning input (2026-07) says SPS is
-  consolidating on Claude with Copilot and Cursor being sunset; the developer docs still document
-  Copilot as live and requestable ("SPS Commerce provides Copilot licenses for eligible
-  developers," [/ai/tools](https://developer.docs.spscommerce.com/ai/tools), fetched 2026-07-02),
-  and the TAD FAQ treats Copilot/Cursor/Claude Code as parallel tools. One of these is stale.
-  **Confirm with Enterprise AI & Analytics before planning around either version.** This guide
-  assumes the Claude-consolidation direction but nothing below depends on it.
+| Fork | Options | What we lean, and why |
+|---|---|---|
+| **Where truth lives** | Plain **files** you own vs. a **database/app** | **Files.** Portable, no infra to stand up, and the notes outlive any tool. (Open Brain is DB-as-truth + cloud — the thing to *not* copy.) |
+| **Does the AI maintain it?** | AI **edits the notes** (living wiki) vs. you just **store & search** them (RAG) | This is the big one. A maintained wiki compounds; a pile of notes you retrieve from doesn't. It's also the difference between the two SPS options below. |
+| **On new info** | **Regenerate** the page fresh vs. **edit in place** | Open question — the shipping market leans regenerate; edit-in-place keeps a living narrative. Try either. |
+| **Note size** | Human-readable **concept pages** vs. tiny extracted **atoms** | Start page-level; it's what you'll actually read and curate. |
 
-## Data classification — what may go in a second brain
+Full taxonomy (13 axes) and the tool-by-tool survey: [prior-art landscape](../analysis/prior-art-landscape.md).
 
-The [data-classification guardrail](https://developer.docs.spscommerce.com/guardrails/data-classification)
-(standard v10.0, approved 2025-09-25; fetched 2026-07-02) is the single most load-bearing
-constraint on a second brain, because notes accumulate mixed-classification content by nature:
+## Your options at SPS — simplest to most capable
 
-| Your note contains…                                            | Classification | AI allowed                                                    |
-| -------------------------------------------------------------- | -------------- | ------------------------------------------------------------- |
-| Public material (published docs, public specs)                  | Public         | Any AI, incl. free public tools                                |
-| Ordinary work notes, procedures, project docs                   | Internal       | **SPS-licensed AI only** (Claude Enterprise qualifies)         |
-| Customer data, pricing, contracts, strategy, financials         | Confidential   | Approved AI **with legal + security review of the use**; no DeepSeek |
-| PII/PHI/PCI (SSNs, payroll, health, card data)                  | Restricted     | **No AI, period**                                              |
+Everyone already has Claude Enterprise, so the real question is *how much of the maintenance loop
+you want the AI to run*. These stack — start at the top, grow down only when you feel the limit.
 
-Practical readings (ours, not policy — confirm edge cases with Security):
+1. **Chat + Projects (claude.ai / desktop).** Keep notes as markdown files; pull them into a
+   Project and ask questions; Claude's per-user memory accumulates across chats. **Store &
+   retrieve** — Claude reads your notes but does **not** edit them; you copy things in and out.
+   Zero setup, good for non-builders and for trying the idea.
+2. **Claude Code + a local markdown vault (the Kieran pattern).** Claude Code reads **and writes**
+   your actual files on disk — it files new material into the right note, updates entity pages,
+   adds links, flags contradictions. This is the **living-wiki loop**: the AI maintains the brain,
+   you curate and direct. This is what most people mean by "a second brain that works."
+3. **+ Obsidian as the viewer.** Point Obsidian at the same folder for graph view, backlinks, and
+   browsing while the agent edits. Optional read-UI over option 1 or 2.
+4. **+ local search / MCP / scripts.** When you want deterministic search (grep / SQLite FTS) or
+   want other local tools to query the brain, add a **local-only MCP server** over the files
+   (loopback/stdio on your own machine — see constraints). Add lint passes for orphans/contradictions.
 
-- A personal second brain on Claude Enterprise is fine for **Public + Internal** content.
-- **Confidential** content in an AI-touched knowledge base needs the use case reviewed and logged
-  ("Logged as an approved AI use case" — guardrail, Do/AI Usage). Don't quietly accumulate
-  customer specifics in a vault an AI reads.
-- **Restricted never goes in.** Interesting precedent: the surveyed second-brain code already
-  implements this shape — OB1 regex-gates `restricted` content out of cloud paths
-  ([OB1 recon §6](../sources/ob1-ingestion-recon.md)); whatever you build should too.
-- **Never use customer data to train AI models** (guardrail, hard rule).
+**So what's the difference between #1 and #2?** Whether the AI *maintains* your files or just
+*reads copies* of them. In #1 your notes are uploaded snapshots and Claude's memory is the only
+thing that grows; in #2 Claude edits your real markdown in place, so the vault itself is the
+compounding artifact. #1 is a searchable pile; #2 is a living wiki.
 
-## Connector / MCP governance (the approval reality)
+## Getting started — a concrete starter (option 2)
 
-Docs that say "just install X" are naive here. The actual surface, as of the cited dates:
+You don't need our tooling (there isn't any yet — this is research). Here's the shape to stand up
+today with Claude Code + a folder:
 
-- **Every system connected to Claude Enterprise is governed** through the _Claude Platform —
-  Connection Registry_ (DSOL page 780120502, updated 2026-06-23): one row per system, risk tiers
-  (High = write access / sensitive data / big blast radius), **Track A** intake for new systems,
-  **Track B** for new methods/config changes, SECGRC review always required for High-tier and any
-  Custom Remote MCP, annual revalidation. Unregistered systems must register (Application SOP for
-  vendor apps, Tech Registry for SPS-built) before intake proceeds. Requests go to the Claude
-  Platform Jira project.
-- **Per-use connector approval is deliberate:** _"Always allow for connectors: OFF — users cannot
-  permanently approve connector tools; each use requires explicit approval. This reduces prompt
-  injection risk"_ (Admin Reference, 769063006, 2026-07-01). Cowork's "act without asking" is
-  likewise off. Expect the approval clicks; they're policy, not a bug.
-- **Local MCP is a recognized method with its own gate:** the registry's "Extension / Local MCP"
-  method requires **MDM deployment approval, IT coordination, and device-group scoping**; the one
-  currently-enabled example is scoped _"via Local MCP — builders only"_ (Power BI row, registry,
-  2026-06-23). Meanwhile Claude Code's server-managed settings (incl. MCP allow/deny lists) are
-  **not yet deployed** (Admin Reference; tracked as TECHSOL-342) — so today a builder can run
-  local MCP servers unconstrained. Read that as a **window, not a policy**: the documented
-  direction is a managed allowlist. Building a personal, local, files-only MCP server appears to
-  sit in a gray zone between "your dev tooling" and "a governed connection" — **ask in
-  #claude-users / the Claude Platform project before investing**, and expect the answer to move.
-- **Prompt injection is the recurring rationale** across the decision log (Channels backlogged,
-  ambient Slack mode off, always-allow off). An LLM-maintained wiki is itself an injection
-  surface (the LLM reads files it also writes); if you build one, adopt the ingest hardening the
-  surveyed code already uses (`<document>` wrapping, treat-as-data prompts —
-  [OB1 recon §1](../sources/ob1-ingestion-recon.md)).
-- **Device trust is rolling out:** Jamf (macOS) / InTune (Windows) enrollment required, unmanaged
-  devices denied (Admin Controls & Feature Toggles, 769813768, 2026-05-29 — older page; confirm
-  current state). Your second brain lives on an enrolled device or it doesn't talk to Claude.
-- **New vendors trigger GRC vendor review** (registry prerequisite policy + Application SOP).
-  That includes "harmless" note tools if they touch SPS data with AI.
+1. **Make the vault.** A folder, ideally a `git` repo (so every AI edit is a reviewable diff).
+   Back it up to **SharePoint/OneDrive** — that's the approved-storage + durability answer.
+2. **Seed the structure** (this is the [OKF](../sources/okf-spec.md) shape — markdown + YAML
+   frontmatter + plain links):
+   - `index.md` — the map / entry point the agent keeps current.
+   - `log.md` — a chronological capture stream (Karpathy's pattern).
+   - concept notes (`people/`, `projects/`, `topics/…`) created as you go; link them with `[[wikilinks]]`.
+3. **Write the agent's operating instructions** — this is the "skill" layer, and it's where the
+   quality comes from. Put a `CLAUDE.md` in the vault (or the same text as a claude.ai **Project
+   instruction** / **Skill**) telling the agent: _files are the source of truth; when I share a
+   source, extract the key points and file them into the right note; create/update entity pages;
+   keep links and `index.md` current; **flag contradictions** with existing notes; and **cite where
+   each claim came from** so I can trust it._
+4. **Run the loop.** Paste or point at a source → the agent files and links it → you review the
+   diff / browse in Obsidian → ask questions that pull across notes. Sourcing and good questions
+   are your job; the filing and bookkeeping are the agent's.
+5. **Grow only when it hurts.** Add Obsidian for browsing, grep/FTS or a local MCP server for
+   retrieval, a periodic "lint" chat for orphans/contradictions/stale claims. Start dumb, harden
+   what you actually use.
 
-## Which surveyed approaches clear the SPS bar
+**The one thing to get right: trust.** Because an LLM is writing these notes, make it cite sources
+inline and keep edits reviewable (git diffs). Uncited AI-authored "knowledge" is the failure mode —
+it's also the gap no surveyed tool closes well, so it's worth your attention
+([why](for-us-builders.md#the-wedge-to-lead-with)).
 
-Judgment call against the constraints above (evidence: [prior-art landscape](../analysis/prior-art-landscape.md),
-[deployability readout](for-enterprise-staff.md)):
+Reading: [Kieran's writeup](../sources/kieran-ai-second-brain.md) (a real working setup) and the
+[Karpathy gist](../sources/andrej-wiki-gist.md) (the pattern) are both short and worth 10 minutes.
 
-| Approach                                                        | SPS verdict today (2026-07-02)                                                                                                                       |
-| ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Plain markdown + Claude Enterprise** (projects/uploads/memory)  | ✅ Clears now. Zero new approvals. The floor everyone should start on.                                                                                  |
-| **Local markdown vault + Claude Code** (Kieran pattern)           | ✅ Clears for builders now (IAM ticket for Claude Code). Files local, AI sanctioned, no new vendor.                                                     |
-| **Obsidian (+ AI plugins) as the vault UI**                       | 🟡 Obsidian-as-editor over local files is likely fine as desktop software, but **verify its software-approval status** (GRC/IT) — and any *plugin that calls a model* is its own AI-tool question. Not in the connection registry as of 2026-06-23. |
-| **Local MCP server over files** (Basic Memory-shaped)             | 🟡 Technically possible today (managed MCP settings not yet deployed); governance gray zone — Extension/Local MCP method exists with MDM/IT gates for governed systems. Ask before building; expect tightening. |
-| **DB-as-truth cloud stacks** (OB1: Supabase + OpenRouter)         | ❌ New vendors + SPS data through unapproved AI endpoints = vendor review you will not enjoy. Also architecturally the wrong bet ([claims audit](../analysis/nate-post-claims-audit.md)). |
-| **Self-hosted servers** (Khoj etc.)                               | ❌ Infra to stand up + custody of personal notes = an IT project, not a personal tool ([enterprise-IT readout](for-enterprise-it.md)).                  |
+## Constraints (the short version)
 
-Tradeoffs to keep in view (nobody's marketing will volunteer these): Claude Enterprise spend is
-tracked and capped at org level with member-visible analytics (Decision Log, 2026-07-01) — heavy
-agentic workflows (Workflows feature: "up to 1,000 subagents, high token consumption") are watched
-on a leadership dashboard; automated code review bills separately with configurable caps; retention
-of Claude conversations is unlimited **pending a Legal/Compliance review** (Decision Log) — your
-chat history is not ephemeral; and any tool you adopt is a bet on its survival — keep the exit
-story (markdown files) non-negotiable.
+- **Data classification** — your notes inherit it. Public/Internal are fine on Claude Enterprise;
+  keep Confidential out of an AI-maintained vault unless the use is reviewed; never put Restricted
+  (PII/PHI/PCI) into any AI. The authoritative reference is
+  [AI at SPS](https://spscommerce.sharepoint.com/sites/aiatsps/SitePages/AI%20at%20SPS.aspx) —
+  follow it, we're not restating it here.
+- **Local-only MCP over your own files is fine.** A loopback/stdio MCP server on your own machine,
+  not exposed to the network, is just your dev tooling — no different from a local script. SPS
+  connector/MCP *governance* is about wiring **vendors or shared systems** into Claude Enterprise
+  (remote connectors), which is a different thing; if you go there, it's the Claude Platform intake
+  process, not a personal-vault concern.
+- **New vendor tools that touch SPS data trigger GRC review.** Staying on **files + Claude
+  Enterprise** (options 1–2) avoids that entirely — which is a large part of why it's the
+  recommendation.
 
-## Internal precedent (who's tried what)
+## Provisional / to verify
 
-- **#guild-ai** — the practitioner community this repo's [review persona](../sources/sps-ai-builder-persona.md)
-  is distilled from (Jun–Aug 2025 window): senior engineers building MCP servers, agents, and RAG
-  experiments, alongside everyday-task users. The channel's standing complaints — docs that aren't
-  LLM-legible, tribal knowledge scattered across Confluence/Slack, governance friction on every
-  new tool — are the problems a second brain addresses.
-- **#claude-users** — support channel for Claude Code ([developer docs](https://developer.docs.spscommerce.com/ai/tools/claude-code)).
-- **SPS-built MCP servers already through governance** (registry, 2026-06-23: Developer MCP,
-  Attributes, Fulfillment Monitor, System Automation, Brand & Messaging — all "Enabled") — proof
-  the intake path works and the pattern to copy for anything shared.
-- **Prior internal PKM/second-brain material: essentially none** (our 2026-06/07 searches found
-  one stale 2019 page — provisional claim; a deeper Confluence sweep may surface more). This repo
-  is the gap-filler; that's why it exists.
+This guide is early and meant to be iterated. Known-soft points, with who owns the answer:
 
-## Open questions to confirm (with owners)
-
-1. **Copilot/Cursor sunset vs. live docs** — which is current? → Enterprise AI & Analytics.
-2. **Personal local MCP over private files: dev tooling or governed connection?** Where's the
-   line, and will the coming managed MCP allowlist have a personal-use lane? → Claude Platform /
-   Enterprise AI & Analytics (#claude-users to start).
-3. **Obsidian software-approval status** (and model-calling plugins specifically) → IT / Security GRC.
-4. **Confidential-class notes in a personal AI-touched vault** — what does "logged as an approved
-   AI use case" mean for an individual, practically? → Security GRC.
-5. **Device-trust rollout state** (Jamf/InTune requirement — the 2026-05-29 page may be stale) → IT.
-6. **Does the org want a packaged/blessed second-brain option** (the
-   [enterprise-IT recommendation](for-enterprise-it.md)) rather than N ad-hoc personal ones? →
-   Enterprise AI & Analytics. This repo's research is the input for that conversation.
-
-## Provenance of every SPS claim above
-
-| Claim                                                       | Source (all fetched 2026-07-02)                                        | Confirm with                    |
-| ----------------------------------------------------------- | ----------------------------------------------------------------------- | -------------------------------- |
-| Data-classification → AI matrix; no-AI-on-Restricted; no customer-data training | [/guardrails/data-classification](https://developer.docs.spscommerce.com/guardrails/data-classification) (standard v10.0, 2025-09-25) | Security                         |
-| Connector registry, risk tiers, Track A/B, SECGRC triggers, Local-MCP method gates | DSOL 780120502 _Connection Registry_ (updated 2026-06-23)               | Enterprise AI & Analytics        |
-| Feature toggles: memory on, always-allow off, bypass off, auto mode approved, retention pending review | DSOL 780118458 _Decision Log_ (v4, 2026-07-02) · DSOL 769063006 _Admin Reference_ (2026-07-01) | Enterprise AI & Analytics        |
-| Managed settings / MCP allowlist not yet deployed (TECHSOL-342) | DSOL 769063006 (2026-07-01)                                              | Enterprise AI & Analytics        |
-| Device trust (Jamf/InTune), SSO/domain capture, no-training clause | DSOL 769813768 _Admin Controls_ (2026-05-29 — oldest page here)          | AI Enablement / Cyber Eng & Defense |
-| Claude Code access via IAM ticket; #claude-users             | [/ai/tools/claude-code](https://developer.docs.spscommerce.com/ai/tools/claude-code) | IT / IAM desk                    |
-| Bedrock golden path + SECOPS approval for agents             | [/guardrails/ai-agents](https://developer.docs.spscommerce.com/guardrails/ai-agents) | SECOPS / ACE Engineering         |
-| MCP build standards (naming, auth, reviews)                  | [/guardrails/mcp](https://developer.docs.spscommerce.com/guardrails/mcp) | Engineering Enablement           |
-| Copilot documented live (vs. sunset direction)               | [/ai/tools](https://developer.docs.spscommerce.com/ai/tools)             | Enterprise AI & Analytics        |
+- **Nobody at SPS has publicly run a second brain yet** — our 2026-06/07 searches found essentially
+  no prior internal PKM material (one stale 2019 page). This repo is the starting point, not a
+  report on established practice. (Verify via a deeper Confluence sweep.)
+- **Org direction is consolidating on Claude Enterprise** (employee harnesses) with app-level
+  inference on Claude via AWS Bedrock — as of 2026-07, per planning input; confirm current posture
+  with **Enterprise AI & Analytics**.
+- **Data-classification specifics for a personal AI-maintained vault** (what "reviewed use" means
+  in practice for Confidential content) → **Security GRC**, anchored to
+  [AI at SPS](https://spscommerce.sharepoint.com/sites/aiatsps/SitePages/AI%20at%20SPS.aspx).

@@ -60,7 +60,8 @@ Per-tool readout (as of 2026-06-18; tool entries with evidence in the
 - Keep notes as plain markdown files in approved storage from day one — every credible tool in
   this space can adopt a folder of markdown later; proprietary formats are the lock-in to avoid.
 - Don't paste sensitive data into unapproved tools; classification rules apply to your notes too
-  (at SPS: see the [data-classification → AI matrix](sps-guide.md#data-classification--what-may-go-in-a-second-brain)).
+  (at SPS: see [the SPS guide's constraints](sps-guide.md#constraints-the-short-version) →
+  [AI at SPS](https://spscommerce.sharepoint.com/sites/aiatsps/SitePages/AI%20at%20SPS.aspx)).
 
 ## The unsolved gap (for whoever builds/buys next)
 

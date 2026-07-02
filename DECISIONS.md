@@ -20,16 +20,26 @@ Branch `curate/0009-tiered-sps-reference`, 2026-07-02. Terse by design; details 
 - T3 docs are "self-contained judgment + linked evidence," not strictly fact-free pointers → resolves the increment's own single-file-vs-tiers tension in favor of droppability (persona checklist #1).
 - 0008 reconciled by updating its taxonomy note in place (original preserved) → coordinate-don't-rewrite instruction.
 
+## sps-guide rewrite (post-review feedback)
+
+The first draft restated SPS's own context back to the reader (Claude Enterprise setup, the
+data-classification matrix, MCP governance) — all covered elsewhere, so it landed flat. Rewritten
+to lead with what the reader *doesn't* have: (1) the mental model — what a second brain is + the 4
+forks (files-vs-DB truth, AI-maintains-vs-store&search, regenerate-vs-edit-in-place, page-vs-atom);
+(2) options ranked simplest→capable with the crisp #1-vs-#2 distinction (does the AI maintain your
+files or just read copies); (3) a concrete getting-started recipe (vault + `index.md`/`log.md`,
+agent `CLAUDE.md`/Skill instructions, the loop, grow-when-it-hurts). Governance demoted to short
+pointers. Removed: Copilot (distraction), the data-classification matrix (→ 1-line + AI-at-SPS
+SharePoint link), Claude Enterprise setup restating, MCP how-to restating. Local-only MCP over own
+files reframed as plainly fine (was hedged as a gray zone).
+
 ## SPS policy claims to verify (claim → source → owner)
 
-1. **Copilot/Cursor sunset vs. live docs — the planning input and developer docs disagree** (docs still offer Copilot licenses; TAD FAQ treats Copilot/Cursor/Claude Code as parallel) → `/ai/tools` fetched 2026-07-02 vs. 0009 anchor facts → **Enterprise AI & Analytics**.
-2. Data-classification → AI matrix (Internal = SPS-licensed AI only; Confidential = reviewed+logged; Restricted = no AI; no customer-data training) → `/guardrails/data-classification` (std v10.0, 2025-09-25) → **Security**.
-3. Connector governance: registry + Track A/B intake, SECGRC triggers, per-use connector approval (no always-allow), Local-MCP method gated by MDM/IT → DSOL 780120502 (2026-06-23) + 769063006 (2026-07-01) → **Enterprise AI & Analytics**.
-4. Claude Code managed settings / MCP allowlist **not yet deployed** (local MCP currently unconstrained — treated as a window, not policy) → DSOL 769063006 → **Enterprise AI & Analytics**.
-5. Device trust (Jamf/InTune required; unmanaged denied) → DSOL 769813768 (**2026-05-29 — oldest page, most likely stale**) → **AI Enablement / Cyber Eng & Defense**.
-6. Claude memory on per-user; retention unlimited **pending Legal/Compliance review** → DSOL 780118458 (2026-07-02) → **Enterprise AI & Analytics / Legal**.
-7. "Essentially no prior internal PKM material (one stale 2019 page)" → our 2026-06/07 searches; not exhaustive → deeper Confluence sweep.
-8. App-level inference = Claude on AWS Bedrock → ai-agents guardrail confirms Bedrock golden path but not "Claude" explicitly → **ACE Engineering / SECOPS**.
+1. Org direction consolidating on Claude Enterprise; app-level inference = Claude on AWS Bedrock → planning input + ai-agents guardrail (Bedrock golden path, "Claude" not explicit) → **Enterprise AI & Analytics / ACE Engineering**.
+2. Data-classification rules for a personal AI-maintained vault (what "reviewed use" means for Confidential) → [AI at SPS](https://spscommerce.sharepoint.com/sites/aiatsps/SitePages/AI%20at%20SPS.aspx) + `/guardrails/data-classification` (std v10.0, 2025-09-25) → **Security GRC**.
+3. "Essentially no prior internal PKM material (one stale 2019 page)" → our 2026-06/07 searches; not exhaustive → deeper Confluence sweep.
+
+_(Dropped from the earlier list as no longer load-bearing in the reoriented guide: the connector/registry governance detail, MCP-allowlist-not-yet-deployed, device-trust page, retention-review — all real, but they belong to the AI-at-SPS/governance owners and aren't what this guide is for. Copilot/Cursor sunset question removed entirely per feedback.)_
 
 ## Open gaps
 
